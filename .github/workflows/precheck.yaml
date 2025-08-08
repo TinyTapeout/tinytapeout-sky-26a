@@ -78,7 +78,7 @@ jobs:
     env:
       USER_ID: 5454
       PROJECT: caravel_openframe
-      KLAYOUT_VERSION: 0.29.11
+      KLAYOUT_VERSION: 0.29.12
       MAGIC_VERSION: 8.3.471
       PDK: sky130A
       PDK_ROOT: ${{ github.workspace }}/pdk
