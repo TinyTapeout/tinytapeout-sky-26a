@@ -40,7 +40,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
-      - run: pip install -r tt-multiplexer/py/requirements.txt -r tt/requirements.txt
+      - run: pip install -r tt-multiplexer/py/requirements.txt -r tt/requirements.txt -r verilog/dv/mux/requirements.txt
 
       - name: Load OpenLane environment variables
         run: cat .github/config/openlane.txt | tee -a $GITHUB_ENV
@@ -164,12 +164,9 @@ jobs:
           name: chipfoundry_submission
           path: chipfoundry
 
-      # Install iverilog, cocotb (required for GL test)
-      - name: install oss-cad-suite
-        uses: YosysHQ/setup-oss-cad-suite@v3
-        with:
-          version: '2023-05-27'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      # Install iverilog (required for GL simulation)
+      - name: install iverilog
+        run: sudo apt-get update && sudo apt-get install -y iverilog
 
       - name: GL simulation
         working-directory: verilog/dv/mux
