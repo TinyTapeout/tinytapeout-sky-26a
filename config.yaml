@@ -1,5 +1,6 @@
 id: 'ttsky25a'
 name: 'Tiny Tapeout SKY 25a'
+pdk: 'sky130A'
 end_date: '2025-09-15'
 project_dir: 'projects'
 top_level_macro: 'openframe_project_wrapper'
