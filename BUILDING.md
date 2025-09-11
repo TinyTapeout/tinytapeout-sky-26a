@@ -1,22 +1,20 @@
-# Build Tiny Tapeout with Open Lane 2
+# Build Tiny Tapeout with LibreLane
 
 ## Environment setup
 
 ```bash
-export OPENLANE2_ROOT=~/openlane2
+export LIBRELANE_ROOT=~/librelane
 export SKY130_PDK_VERSION=6d4d11780c40b20ee63cc98e645307a9bf2b2ab8
 
 pip3 install volare
 volare enable --pdk sky130 $SKY130_PDK_VERSION
 ```
 
-Then install OpenLane 2 with Nix, as explained [here](https://openlane2.readthedocs.io/en/latest/getting_started/nix_installation/index.html), taking care of the following:
+Then install LibreLane with Nix, as explained [here](https://librelane.readthedocs.io/en/latest/getting_started/common/nix_installation/installation_linux.html), taking care of the following:
 
-1. Look at the value of `OPENLANE_TAG` in [.github/config/openlane.txt](.github/config/openlane.txt) to find the exact OpenLane 2 commit you need to check out. Installing a different version will likely not work, as OpenLane 2 is still in beta and the API is not very stable.
+1. Look at the value of `LIBRELANE_TAG` in [.github/config/librelane.txt](.github/config/librelane.txt) to find the exact LibreLane commit you need to check out. Installing a different version will likely not work, as LibreLane is still in beta and the API is not very stable.
 
-2. Clone OpenLane 2 to ~/openlane2 (or change the value of the `OPENLANE2_ROOT` environment variable).
-
-3. Apply patches to OpenLane 2: `git -C $OPENLANE2_ROOT apply $PWD/patches/openlane2.patch`
+2. Clone LibreLane to ~/librelane (or change the value of the `LIBRELANE_ROOT` environment variable).
 
 ## Repository setup
 
@@ -43,11 +41,11 @@ python tt/configure.py --update-shuttle
 ## Harden
 
 ```bash
-nix-shell ${OPENLANE2_ROOT}/shell.nix --run "python -m openlane tt/rom/config.json"
-nix-shell ${OPENLANE2_ROOT}/shell.nix --run "cd tt-multiplexer/ol2/tt_ctrl && python build.py"
-nix-shell ${OPENLANE2_ROOT}/shell.nix --run "cd tt-multiplexer/ol2/tt_mux && python build.py"
+nix-shell ${LIBRELANE_ROOT}/shell.nix --run "python -m librelane tt/rom/config.json"
+nix-shell ${LIBRELANE_ROOT}/shell.nix --run "cd tt-multiplexer/ol2/tt_ctrl && python build.py"
+nix-shell ${LIBRELANE_ROOT}/shell.nix --run "cd tt-multiplexer/ol2/tt_mux && python build.py"
 python tt/configure.py --copy-macros
-nix-shell ${OPENLANE2_ROOT}/shell.nix --run "cd tt-multiplexer/ol2/tt_top && python build.py --skip-xor-checks"
+nix-shell ${LIBRELANE_ROOT}/shell.nix --run "cd tt-multiplexer/ol2/tt_top && python build.py --skip-xor-checks"
 ```
 
 Note: We're skipping the XOR checks as they takes a lot of time and require much RAM (~ 64 GB). If you have enough RAM, you can remove the `--skip-xor-checks` flag.

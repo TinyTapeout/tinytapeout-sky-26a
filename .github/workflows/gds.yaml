@@ -42,33 +42,27 @@ jobs:
           cache: 'pip'
       - run: pip install -r tt-multiplexer/py/requirements.txt -r tt/requirements.txt -r verilog/dv/mux/requirements.txt
 
-      - name: Load OpenLane environment variables
-        run: cat .github/config/openlane.txt | tee -a $GITHUB_ENV
+      - name: Load LibreLane environment variables
+        run: cat .github/config/librelane.txt | tee -a $GITHUB_ENV
 
-      - name: Checkout OpenLane 2 repo
+      - name: Checkout LibreLane repo
         uses: actions/checkout@v4
         with:
-          repository: efabless/openlane2
-          path: openlane2
-          ref: ${{ env.OPENLANE_TAG }}
-
-      - name: Patch OpenLane 2 repo
-        working-directory: openlane2
-        run:
-          git apply --allow-empty ../patches/openlane2.patch
+          repository: librelane/librelane
+          path: librelane
+          ref: ${{ env.LIBRELANE_TAG }}
 
       - name: Update caravel configuration
         run: python ./tt/configure.py --update-shuttle
 
-      - uses: cachix/install-nix-action@v26
-
-      - uses: cachix/cachix-action@v14
+      - name: Install Nix and configure FOSSi cache
+        uses: cachix/install-nix-action@v31
         with:
-          name: ${{ vars.CACHIX_CACHE || 'tinytapeout' }}
-          extraPullNames: ${{ vars.CACHIX_CACHE_EXTRA || 'openlane' }}
-          authToken: ${{ secrets.CACHIX_TOKEN }}
+          extra_nix_config: |
+            extra-substituters = https://nix-cache.fossi-foundation.org
+            extra-trusted-public-keys = nix-cache.fossi-foundation.org:3+K59iFwXqKsL7BNu6Guy0v+uTlwsxYQxjspXzqLYQs=
 
-      - name: Install Sky130 PDK
+      - name: Install SKY130 PDK
         uses: TinyTapeout/volare-action@v2
         with:
           pdk_name: sky130
@@ -84,8 +78,10 @@ jobs:
               continue
             fi
 
-            # Skip projects that were not built with OpenLane2 (e.g. analog and mixed-signal projects)
-            if [[ "$(jq -r '.openlane_version' $project/commit_id.json)" != "OpenLane2 2"* ]]; then
+            # Skip projects that were not built with OpenLane2 or LibreLane (e.g. analog and mixed-signal projects)
+            if [[ "$(jq -r '.openlane_version' $project/commit_id.json)" != "OpenLane2 2"* ]] && \
+               [[ "$(jq -r '.flow_version' $project/commit_id.json)" != "OpenLane2 2"* ]] && \
+               [[ "$(jq -r '.flow_version' $project/commit_id.json)" != "LibreLane "* ]]; then
               continue
             fi
             
@@ -94,24 +90,24 @@ jobs:
             fi
           done
 
-      # run OpenLane to build the GDS
+      # Use LibreLane to build the macros and the final GDS
       - name: Harden Chip ROM
-        run: nix-shell $GITHUB_WORKSPACE/openlane2/shell.nix --run "python -m openlane tt/rom/config.json"
+        run: nix-shell $GITHUB_WORKSPACE/librelane/shell.nix --run "python -m librelane tt/rom/config.json"
 
       - name: Harden tt_ctrl
         working-directory: tt-multiplexer/ol2/tt_ctrl
-        run: nix-shell $GITHUB_WORKSPACE/openlane2/shell.nix --run "python build.py"
+        run: nix-shell $GITHUB_WORKSPACE/librelane/shell.nix --run "python build.py"
 
       - name: Harden tt_mux
         working-directory: tt-multiplexer/ol2/tt_mux
-        run: nix-shell $GITHUB_WORKSPACE/openlane2/shell.nix --run "python build.py"
+        run: nix-shell $GITHUB_WORKSPACE/librelane/shell.nix --run "python build.py"
 
       - name: Copy macros
         run: python ./tt/configure.py --copy-macros
 
       - name: Harden tt_top
         working-directory: tt-multiplexer/ol2/tt_top
-        run: nix-shell $GITHUB_WORKSPACE/openlane2/shell.nix --run "python build.py --skip-xor-checks"
+        run: nix-shell $GITHUB_WORKSPACE/librelane/shell.nix --run "python build.py --skip-xor-checks"
 
       - name: Copy final results
         run: python ./tt/configure.py --copy-final-results
