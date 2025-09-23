@@ -29,7 +29,7 @@ async def enable_design(dut, mux_addr):
 
 @cocotb.test()
 async def test_mux(dut):
-    clock = Clock(dut.clk, 100, units="ns")  # 10 MHz
+    clock = Clock(dut.clk, 100, unit="ns")  # 10 MHz
     cocotb.start_soon(clock.start())
 
     dut.uio_in.value = 0
@@ -67,7 +67,7 @@ async def test_mux(dut):
 
 @cocotb.test()
 async def test_rom(dut):
-    clock = Clock(dut.clk, 100, units="ns")  # 10 MHz
+    clock = Clock(dut.clk, 100, unit="ns")  # 10 MHz
     cocotb.start_soon(clock.start())
 
     dut.uio_in.value = 0
