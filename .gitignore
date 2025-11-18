@@ -8,17 +8,8 @@ datasheet.pdf
 shuttle_index.json
 shuttle_index.md
 
-# Auto generated ChipFoundry submission files:
-chipfoundry/gds/*.gds
-chipfoundry/gds/*.lef
-chipfoundry/verilog/gl/user_project_wrapper.v
-chipfoundry/verilog/gl/openframe_project_wrapper.v
-chipfoundry/verilog/rtl/user_defines.v
-chipfoundry/README.md
-# Legacy eFabless submission files:
-efabless/
-# IHP submission files:
-ihp/
+# Auto generated foundry submission folder:
+foundry_submission/
 
 # pip-compile
 *.egg-info

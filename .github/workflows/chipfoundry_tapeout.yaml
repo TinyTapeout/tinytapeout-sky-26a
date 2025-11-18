@@ -17,7 +17,7 @@ jobs:
         with:
           workflow: gds.yaml
           workflow_conclusion: success
-          name: chipfoundry_submission
+          name: foundry_submission
           path: tinytapeout_submission
 
       - name: Print Tapeout Information

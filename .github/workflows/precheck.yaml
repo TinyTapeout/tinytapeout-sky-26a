@@ -44,7 +44,7 @@ jobs:
           workflow: gds.yaml
           run_id: ${{ github.event.workflow_run.id }}
           workflow_conclusion: success
-          name: chipfoundry_submission
+          name: foundry_submission
           path: tinytapeout-submission
 
       - name: Run precheck (run id = ${{ fromJSON(steps.download_artifact.outputs.artifacts)[0].workflow_run.id }})
@@ -132,7 +132,7 @@ jobs:
           workflow: gds.yaml
           run_id: ${{ github.event.workflow_run.id }}
           workflow_conclusion: success
-          name: chipfoundry_submission
+          name: foundry_submission
           path: tinytapeout-submission
 
       - name: Create final .oas file
