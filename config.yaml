@@ -10,6 +10,6 @@ datasheet_config:
   theme_override_colour: tt.colours.THEME_SKY_BLUE
   link_override_colour: tt.colours.THEME_SKY_BLUE
 
-  # include:
-    # - docs/chip_map.typ
+  include:
+    - docs/chip_map.typ
     # - docs/funding.typ
