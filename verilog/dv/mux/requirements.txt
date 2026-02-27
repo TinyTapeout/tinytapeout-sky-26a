@@ -8,7 +8,7 @@ cocotb==2.0.1
     # via tt-mux (pyproject.toml)
 find-libpython==0.5.0
     # via cocotb
-iniconfig==2.3.0
+iniconfig==2.1.0
     # via pytest
 packaging==25.0
     # via pytest
