@@ -44,10 +44,6 @@ jobs:
         with:
             typst-version: '0.13.1'
 
-      # Temporary patch to make space for 4-tile high projects:
-      - name: Patch mux configuration to make room for x4-tile high projects
-        run: ./patch_mux_config.sh
-
       - name: Generate datasheet files
         run: python ./tt/configure.py --build-datasheet
 
