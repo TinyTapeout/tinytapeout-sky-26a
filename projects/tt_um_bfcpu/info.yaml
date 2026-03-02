@@ -1,0 +1,64 @@
+# Tiny Tapeout project information
+project:
+  title:        "bfCPU"      # Project title
+  author:       "Munetomo Maruyama"   # Your name
+  discord:      "munetomo_85572"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "A universal Turing Machine Implemented as a Superset of Brainf*ck" # One line description of what your project does
+  language:     "SystemVerilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     10000000        # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "2x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_bfcpu"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "tt_um_bfcpu.sv"
+    - "TOP/top.sv"
+    - "CPU/cpu.sv"
+    - "CACHE/cache.sv"
+    - "QSPI_SRAM/qspi_sram.sv"
+    - "UART/uart.sv"
+    - "UART/sasc/trunk/rtl/verilog/sasc_top.v"
+    - "UART/sasc/trunk/rtl/verilog/sasc_fifo4.v"
+    - "UART/sasc/trunk/rtl/verilog/sasc_brg.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: ""
+  ui[1]: ""
+  ui[2]: ""
+  ui[3]: ""
+  ui[4]: ""
+  ui[5]: ""
+  ui[6]: ""
+  ui[7]: "UART_RXD"
+
+  # Outputs
+  uo[0]: "UART_TXD"
+  uo[1]: ""
+  uo[2]: ""
+  uo[3]: ""
+  uo[4]: ""
+  uo[5]: ""
+  uo[6]: ""
+  uo[7]: ""
+
+  # Bidirectional pins
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: "QSPI_SIO2"
+  uio[3]: "QSPI_SIO3"
+  uio[4]: "QSPI_CS_N"
+  uio[5]: "QSPI_SCK"
+  uio[6]: "QSPI_SIO0"
+  uio[7]: "QSPI_SIO1"
+
+# Do not change!
+yaml_version: 6
