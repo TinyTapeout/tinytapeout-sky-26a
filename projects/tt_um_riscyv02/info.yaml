@@ -1,0 +1,57 @@
+# Tiny Tapeout project information
+project:
+  title:        "RISCY-V02"
+  author:       "mysterymath"
+  discord:      ""
+  description:  "16-bit RISC processor, logically pin-compatible with WDC 65C02"
+  language:     "Verilog"
+  clock_hz:     15870000
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x2"
+
+  top_module:  "tt_um_riscyv02"
+
+  source_files:
+    - "project.v"
+    - "riscyv02_regfile.v"
+    - "riscyv02_fetch.v"
+    - "riscyv02_alu.v"
+    - "riscyv02_shifter.v"
+    - "riscyv02_execute.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "IRQB (active-low interrupt request)"
+  ui[1]: "NMIB (active-low NMI, edge-triggered)"
+  ui[2]: "RDY (active-high ready)"
+  ui[3]: ""
+  ui[4]: ""
+  ui[5]: ""
+  ui[6]: ""
+  ui[7]: ""
+
+  # Outputs (phase 0: AB[7:0], phase 1: {0,0,0,0,0,0,SYNC,RWB})
+  uo[0]: "AB0 / RWB"
+  uo[1]: "AB1 / SYNC"
+  uo[2]: "AB2"
+  uo[3]: "AB3"
+  uo[4]: "AB4"
+  uo[5]: "AB5"
+  uo[6]: "AB6"
+  uo[7]: "AB7"
+
+  # Bidirectional pins (phase 0: AB[15:8] out, phase 1: D[7:0] bidir)
+  uio[0]: "AB8 / D0"
+  uio[1]: "AB9 / D1"
+  uio[2]: "AB10 / D2"
+  uio[3]: "AB11 / D3"
+  uio[4]: "AB12 / D4"
+  uio[5]: "AB13 / D5"
+  uio[6]: "AB14 / D6"
+  uio[7]: "AB15 / D7"
+
+# Do not change!
+yaml_version: 6
