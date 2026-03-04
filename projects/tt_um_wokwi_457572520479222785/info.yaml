@@ -1,0 +1,49 @@
+# Tiny Tapeout project information (Wokwi project)
+project:
+  wokwi_id:     457572520479222785       # Set this to the ID of your Wokwi project (the number from the project's URL)
+  title:        "Tiny Tapeout: Buenos días Mundo! "      # Project title
+  author:       "Mario Javier García Duarte"      # Your name
+  discord:      "mariojgarcia"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "Gate test"      # One line description of what your project does
+  language:     "Wokwi" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "Logic input"
+  ui[1]: "Logic input"
+  ui[2]: "Logic input"
+  ui[3]: "Logic input"
+  ui[4]: "Logic input"
+  ui[5]: "Logic input"
+  ui[6]: "Logic input"
+  ui[7]: "Logic input"
+
+  # Outputs
+  uo[0]: "Logic output"
+  uo[1]: "Logic output"
+  uo[2]: "Logic output"
+  uo[3]: "Logic output"
+  uo[4]: "Logic output"
+  uo[5]: "Logic output"
+  uo[6]: "Logic output"
+  uo[7]: "Logic output"
+
+  # Bidirectional pins
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+# Do not change!
+yaml_version: 6
