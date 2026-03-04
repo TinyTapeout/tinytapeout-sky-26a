@@ -1,0 +1,49 @@
+# Tiny Tapeout project information (Wokwi project)
+project:
+  wokwi_id:     457571274041781249
+  title:        "Tiny Tapeout Workshop by Kirsty Tan"   
+  author:       "Kirsty Tan"
+  discord:      "Anima"
+  description:  "Tiny Tapeout Chip (Used to convert your design into ASIC files required for manufacturing)"
+  language:     "Wokwi" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     10000
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "Inputa"
+  ui[1]: "Inputb"
+  ui[2]: "Inputc"
+  ui[3]: "Inputd"
+  ui[4]: "Inpute"
+  ui[5]: "Inputf"
+  ui[6]: "Inputg"
+  ui[7]: "Inputh"
+
+  # Outputs
+  uo[0]: "Outputa"
+  uo[1]: "Outputb"
+  uo[2]: "Outputc"
+  uo[3]: "Outputd"
+  uo[4]: "Outpute"
+  uo[5]: "Outputf"
+  uo[6]: "Outputg"
+  uo[7]: "Outputh"
+
+  # Bidirectional pins
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+# Do not change!
+yaml_version: 6
