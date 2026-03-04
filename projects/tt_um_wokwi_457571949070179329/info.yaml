@@ -1,0 +1,49 @@
+# Tiny Tapeout project information (Wokwi project)
+project:
+  wokwi_id:     457571949070179329       # Set this to the ID of your Wokwi project (the number from the project's URL)
+  title:        "Tom Haley Tiny Tape Out Design "      # Project title
+  author:       "Thomas Haley"      # Your name
+  discord:      "thomas_haley0738"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "TBD!"      # One line description of what your project does
+  language:     "Wokwi" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "TBD!"
+  ui[1]: "TBD!"
+  ui[2]: "TBD!"
+  ui[3]: "TBD!"
+  ui[4]: "TBD!"
+  ui[5]: "TBD!"
+  ui[6]: "TBD!"
+  ui[7]: "TBD!"
+
+  # Outputs
+  uo[0]: "TBD!"
+  uo[1]: "TBD!"
+  uo[2]: "TBD!"
+  uo[3]: "TBD!"
+  uo[4]: "TBD!"
+  uo[5]: "TBD!"
+  uo[6]: "TBD!"
+  uo[7]: "TBD!"
+
+  # Bidirectional pins
+  uio[0]: "TBD!"
+  uio[1]: "TBD!"
+  uio[2]: "TBD!"
+  uio[3]: "TBD!"
+  uio[4]: "TBD!"
+  uio[5]: "TBD!"
+  uio[6]: "TBD!"
+  uio[7]: "TBD!"
+
+# Do not change!
+yaml_version: 6
