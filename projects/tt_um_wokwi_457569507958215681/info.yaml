@@ -1,0 +1,49 @@
+# Tiny Tapeout project information (Wokwi project)
+project:
+  wokwi_id:     457569507958215681       # Set this to the ID of your Wokwi project (the number from the project's URL)
+  title:        "Tiny tapeout proj"      # Project title
+  author:       "Hugo Sharpe"      # Your name
+  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "y when pin is correct"      # One line description of what your project does
+  language:     "Wokwi" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "yes or no"
+  ui[1]: "yes or no"
+  ui[2]: "yes or no"
+  ui[3]: "yes or no"
+  ui[4]: "yes or no"
+  ui[5]: "yes or no"
+  ui[6]: "yes or no"
+  ui[7]: "yes or no"
+
+  # Outputs
+  uo[0]: "nothing"
+  uo[1]: "lights up if correct pin"
+  uo[2]: "lights up if correct pin"
+  uo[3]: "lights up if correct pin"
+  uo[4]: "nothing"
+  uo[5]: "lights up if correct pin"
+  uo[6]: "lights up if correct pin"
+  uo[7]: "nothing"
+
+  # Bidirectional pins
+  uio[0]: "no"
+  uio[1]: "no"
+  uio[2]: "no"
+  uio[3]: "no"
+  uio[4]: "no"
+  uio[5]: "no"
+  uio[6]: "no"
+  uio[7]: "no"
+
+# Do not change!
+yaml_version: 6
