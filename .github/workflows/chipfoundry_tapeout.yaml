@@ -8,6 +8,7 @@ jobs:
     env:
       CHIPFOUNDRY_PROJECT_NAME: ${{ vars.CHIPFOUNDRY_PROJECT_NAME }}
       CHIPFOUNDRY_SFTP_USERNAME: ${{ vars.CHIPFOUNDRY_SFTP_USERNAME }}
+      CHIPFOUNDRY_PLATFORM_PROJECT_ID: ${{ vars.CHIPFOUNDRY_PLATFORM_PROJECT_ID }}
     runs-on: ubuntu-24.04
 
     steps:
@@ -46,14 +47,41 @@ jobs:
       - name: Install the ChipFoundry CLI
         run: pip install chipfoundry-cli
 
+      - name: Configure ChipFoundry credentials
+        run: |
+          mkdir -p ~/.chipfoundry-cli
+          cat > ~/.chipfoundry-cli/config.toml << EOF
+          sftp_username = "$CHIPFOUNDRY_SFTP_USERNAME"
+          sftp_key = "$HOME/.ssh/chipfoundry-key"
+          api_key = "$CHIPFOUNDRY_API_KEY"
+          EOF
+        env:
+          CHIPFOUNDRY_API_KEY: ${{ secrets.CHIPFOUNDRY_API_KEY }}
+
+      - name: Create project.json with platform link
+        run: |
+          mkdir -p tinytapeout_submission/.cf
+          cat > tinytapeout_submission/.cf/project.json << EOF
+          {
+            "project": {
+              "name": "$CHIPFOUNDRY_PROJECT_NAME",
+              "type": "openframe",
+              "user": "$CHIPFOUNDRY_SFTP_USERNAME",
+              "version": "1",
+              "platform_project_id": "$CHIPFOUNDRY_PLATFORM_PROJECT_ID",
+              "user_project_wrapper_hash": "",
+              "submission_state": "Draft"
+            }
+          }
+          EOF
+
       - name: Push the project to ChipFoundry
         run: |
           cf push \
             --project-root tinytapeout_submission \
-            --project-name $CHIPFOUNDRY_PROJECT_NAME \
-            --sftp-username $CHIPFOUNDRY_SFTP_USERNAME \
             --project-type openframe \
-            --force-overwrite
+            --force-overwrite \
+            --submit
 
           echo '## ChipFoundry submission' >> $GITHUB_STEP_SUMMARY
           echo '```json' >> $GITHUB_STEP_SUMMARY
@@ -63,6 +91,13 @@ jobs:
           echo '' >> $GITHUB_STEP_SUMMARY
 
       - name: Print ChipFoundry status
+        working-directory: tinytapeout_submission
+        env:
+          COLUMNS: 120
         run: |
           echo '## ChipFoundry status' >> $GITHUB_STEP_SUMMARY
-          cf status --sftp-username $CHIPFOUNDRY_SFTP_USERNAME | tee -a $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cf status | tee -a $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo "[View on ChipFoundry Platform](https://platform.chipfoundry.io/projects/$CHIPFOUNDRY_PLATFORM_PROJECT_ID)" >> $GITHUB_STEP_SUMMARY
