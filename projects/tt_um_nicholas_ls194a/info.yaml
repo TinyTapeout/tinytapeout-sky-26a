@@ -1,0 +1,41 @@
+project:
+  title: "Universal Shift Register (SN74LS194A compatible)"
+  author: "nicholas"
+  discord: "dinngoman"
+  description: "4-bit bidirectional universal shift register: hold, shift right, shift left, parallel load, async active-low clear."
+  language: "Verilog"
+  clock_hz: 1000000
+  tiles: "1x1"
+  top_module: "tt_um_nicholas_ls194a"
+  source_files:
+    - "project.v"
+
+pinout:
+  ui[0]: "S0 (mode select)"
+  ui[1]: "S1 (mode select)"
+  ui[2]: "SR (serial in for shift-right; enters QA)"
+  ui[3]: "SL (serial in for shift-left; enters QD)"
+  ui[4]: "A (parallel in)"
+  ui[5]: "B (parallel in)"
+  ui[6]: "C (parallel in)"
+  ui[7]: "D (parallel in)"
+
+  uo[0]: "QA"
+  uo[1]: "QB"
+  uo[2]: "QC"
+  uo[3]: "QD"
+  uo[4]: ""
+  uo[5]: ""
+  uo[6]: ""
+  uo[7]: ""
+
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+yaml_version: 6
