@@ -1,0 +1,56 @@
+# Tiny Tapeout project information
+project:
+  title:        "Pattern-Guided Arithmetic Optimizations with MLIR"      # Project title
+  author:       "L. Ledoux"      # Your name
+  discord:      "binaryman"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "Streaming byte-fed S3FDP seq+comb accumulator generated from MLIR for-loop."
+  language:     "SystemVerilog/MLIR" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     500000       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "2x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_lledoux_s3fdp_seqcomb"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "project.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "in_byte[0]"
+  ui[1]: "in_byte[1]"
+  ui[2]: "in_byte[2]"
+  ui[3]: "in_byte[3]"
+  ui[4]: "in_byte[4]"
+  ui[5]: "in_byte[5]"
+  ui[6]: "in_byte[6]"
+  ui[7]: "in_byte[7]"
+
+  # Outputs
+  uo[0]: "out_byte[0]"
+  uo[1]: "out_byte[1]"
+  uo[2]: "out_byte[2]"
+  uo[3]: "out_byte[3]"
+  uo[4]: "out_byte[4]"
+  uo[5]: "out_byte[5]"
+  uo[6]: "out_byte[6]"
+  uo[7]: "out_byte[7]"
+
+  # Bidirectional pins
+  uio[0]: "unused"
+  uio[1]: "unused"
+  uio[2]: "unused"
+  uio[3]: "unused"
+  uio[4]: "unused"
+  uio[5]: "unused"
+  uio[6]: "unused"
+  uio[7]: "unused"
+
+# Do not change!
+yaml_version: 6
