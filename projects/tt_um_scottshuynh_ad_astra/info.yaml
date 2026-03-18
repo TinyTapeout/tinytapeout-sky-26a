@@ -1,7 +1,7 @@
 
 # Tiny Tapeout project information
 project:
-  title:        "Bouncing Stripes" # Project title
+  title:        "ASIC Ad Astra" # Project title
   author:       "Scott Huynh"      # Your name
   discord:      "scottshuynh"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "From TT Workshop at FOSSi Down Underflow 2026"      # One line description of what your project does
@@ -9,15 +9,21 @@ project:
   clock_hz:     25175000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  tiles: "1x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_bouncing_stripes"
+  top_module:  "tt_um_scottshuynh_ad_astra"
   
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:
     - "project.v"
-    - "hvsync_generator.v"
+    - "top_greet.sv"
+    - "display_480p.sv"
+    - "lfsr.sv"
+    - "sprite.sv"
+    - "starfield.sv"
+    - "down_underflow_greet_rom.sv" 
+    - "font_unscii_8x8_latin_reduced_rom.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
