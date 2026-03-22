@@ -1,0 +1,67 @@
+# Tiny Tapeout project information
+project:
+  wokwi_id:     0      # Set to 0 for HDL-only projects
+  title:        "Sky26a Advanced TRNG"      # Project title
+  author:       "Josh Gillespie"      # Your name
+  discord:      ".joshjoshjoshjosh"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "8-RO bank TRNG with NIST health monitors and 6 chaotic whiteners."      # One line description of what your project does
+  language:     "Verilog" # other examples include Amaranth, VHDL, etc
+  clock_hz:     10000000       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "2x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_chicagojones_sky26a_trng"
+
+  # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
+  source_files:
+    - "tt_um_trng_ro.v"
+    - "nist_health_monitor.v"
+    - "auto_tuner.v"
+    - "von_neumann.v"
+    - "uart_tx.v"
+    - "uart_rx.v"
+    - "spi_follower.v"
+    - "ro_freq_counter.v"
+    - "cond_tent_map.v"
+    - "cond_coupled_tent.v"
+    - "cond_logistic.v"
+    - "cond_bernoulli.v"
+    - "cond_lorenz.v"
+    - "cond_lfsr.v"
+
+# Pinout-related assignments
+pinout:
+  # ui_in[7:0] : Dedicated inputs
+  ui[0]: ""
+  ui[1]: ""
+  ui[2]: ""
+  ui[3]: "Enable (1=On, 0=Off)"
+  ui[4]: "Auto Mode Enable"
+  ui[5]: "Tunable Select Bit 0"
+  ui[6]: "Tunable Select Bit 1"
+  ui[7]: "Tunable Select Bit 2"
+
+  # uo_out[7:0] : Dedicated outputs
+  uo[0]: "Random Byte Bit 0"
+  uo[1]: "Random Byte Bit 1"
+  uo[2]: "Random Byte Bit 2"
+  uo[3]: "Random Byte Bit 3"
+  uo[4]: "Random Byte Bit 4"
+  uo[5]: "Random Byte Bit 5"
+  uo[6]: "Random Byte Bit 6"
+  uo[7]: "Random Byte Bit 7"
+
+  # uio_in[7:0] / uio_out[7:0] : Bi-directional
+  uio[0]: "Byte Valid Strobe"
+  uio[1]: "UART TX Output (115200 baud)"
+  uio[2]: "UART RX Input (115200 baud)"
+  uio[3]: "SPI CS_N (Active Low)"
+  uio[4]: "SPI SCLK"
+  uio[5]: "SPI MOSI (Address/Data In)"
+  uio[6]: "SPI MISO (Register Out)"
+  uio[7]: ""
+
+# Do not change!
+yaml_version: 6
