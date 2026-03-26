@@ -1,0 +1,56 @@
+# Tiny Tapeout project information
+project:
+  title:        "Formally-Verified Constant-Time AES S-Box"
+  author:       "Onyeka Obi"
+  discord:      ""
+  description:  "Constant-time AES SubBytes/InvSubBytes with registered I/O. Part of the rtlforge project."
+  language:     "Verilog"
+  clock_hz:     50000000
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_aes_sbox"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "project.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "sbox_in[0]"
+  ui[1]: "sbox_in[1]"
+  ui[2]: "sbox_in[2]"
+  ui[3]: "sbox_in[3]"
+  ui[4]: "sbox_in[4]"
+  ui[5]: "sbox_in[5]"
+  ui[6]: "sbox_in[6]"
+  ui[7]: "sbox_in[7]"
+
+  # Outputs
+  uo[0]: "sbox_out[0]"
+  uo[1]: "sbox_out[1]"
+  uo[2]: "sbox_out[2]"
+  uo[3]: "sbox_out[3]"
+  uo[4]: "sbox_out[4]"
+  uo[5]: "sbox_out[5]"
+  uo[6]: "sbox_out[6]"
+  uo[7]: "sbox_out[7]"
+
+  # Bidirectional pins
+  uio[0]: "in_valid"
+  uio[1]: "mode (0=encrypt, 1=decrypt)"
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+# Do not change!
+yaml_version: 6
