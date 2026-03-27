@@ -1,0 +1,48 @@
+project:
+  title:        "Sierpinski Fractal Starfield"
+  author:       "Vasudev Krishna Kottra Chal"
+  discord:      "YourDiscord#1234"
+  description:  "A deep-space nebula effect using Sierpinski logic with 4-voice PWM chiptune audio."
+  language:     "Verilog"
+  clock_hz:     25175000      # Precise VGA clock frequency
+
+  tiles: "1x1"          
+
+  # This MUST match the module name in project.v
+  top_module:  "tt_um_nebula"
+
+  source_files:
+    - "project.v"
+
+pinout:
+  # Inputs: [7:4] Density, [3:0] Flight Speed
+  ui[0]: "Speed bit 0 (LSB)"
+  ui[1]: "Speed bit 1"
+  ui[2]: "Speed bit 2"
+  ui[3]: "Speed bit 3 (MSB)"
+  ui[4]: "Density bit 0 (LSB)"
+  ui[5]: "Density bit 1"
+  ui[6]: "Density bit 2"
+  ui[7]: "Density bit 3 (MSB)"
+
+  # Outputs: VGA RRGGBB + Syncs
+  uo[0]: "Red MSB"
+  uo[1]: "Green MSB"
+  uo[2]: "Blue MSB"
+  uo[3]: "VSync (Active Low)"
+  uo[4]: "Red LSB"
+  uo[5]: "Green LSB"
+  uo[6]: "Blue LSB"
+  uo[7]: "HSync (Active Low)"
+
+  # Bidirectional pins
+  uio[0]: "PWM Audio Out"
+  uio[1]: "unused"
+  uio[2]: "unused"
+  uio[3]: "unused"
+  uio[4]: "unused"
+  uio[5]: "unused"
+  uio[6]: "unused"
+  uio[7]: "unused"
+
+yaml_version: 6
