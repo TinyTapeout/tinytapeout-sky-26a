@@ -18,33 +18,33 @@ project:
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "project.sv"
-    - "control.sv"
     - "base_interface.sv"
     - "compute_top.sv"
     - "cpu_control.sv"
     - "bootloader.sv"
     - "uart_rx.sv"
     - "uart_tx.sv"
+    - "sync_reset.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: "uart_rx"
+  ui[0]: ""
   ui[1]: ""
   ui[2]: ""
-  ui[3]: ""
+  ui[3]: "uart_rx"
   ui[4]: ""
   ui[5]: ""
   ui[6]: ""
   ui[7]: ""
 
   # Outputs
-  uo[0]: "uart_tx"
+  uo[0]: ""
   uo[1]: ""
   uo[2]: ""
   uo[3]: ""
-  uo[4]: ""
+  uo[4]: "uart_tx"
   uo[5]: ""
   uo[6]: ""
   uo[7]: ""
