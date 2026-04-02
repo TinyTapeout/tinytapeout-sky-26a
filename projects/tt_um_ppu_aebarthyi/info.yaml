@@ -3,7 +3,7 @@ project:
   title:        "simple_ppu"      # Project title
   author:       "Andrew Barth-Yi"      # Your name
   discord:      "wandy"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "8-bit PPU (Posit Processing Unit)"      # One line description of what your project does
+  description:  "8-bit Posit MAC with 32-bit Quire"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -18,9 +18,7 @@ project:
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "tt_um_ppu_aebarthyi.v"
-    - "posit_add.v"
-    - "posit_mult.v"
-    - "posit_div.v"
+    - "posit_mac.v"
     - "posit_utils.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
@@ -41,7 +39,7 @@ pinout:
   uo[1]: "ZERO_FLAG"
   uo[2]: "INF_FLAG"
   uo[3]: "READY_OUT"
-  uo[4]: ""
+  uo[4]: "OVERFLOW_FLAG"
   uo[5]: ""
   uo[6]: ""
   uo[7]: ""
