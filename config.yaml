@@ -10,6 +10,9 @@ datasheet_config:
   theme_override_colour: tt.colours.THEME_SKY_BLUE
   link_override_colour: tt.colours.THEME_SKY_BLUE
 
+  disabled:
+    - tt_um_rongbin99_happyredmapleleaf_audio_chip
+
   artwork:
     - {id: TT_POCA_01_A, rotate: -90deg}
     - {id: TT_POCA_01_B, rotate: -90deg}
