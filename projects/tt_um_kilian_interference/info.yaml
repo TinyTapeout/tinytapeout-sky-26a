@@ -1,11 +1,11 @@
 # Tiny Tapeout project information
 project:
-  title:        "Interference Ripples"
+  title:        "Wave Lattice"
   author:       "Kilian"
   discord:      ""
-  description:  "Organic water-caustic interference patterns from orbiting wave sources — no CPU, no memory, pure logic"
+  description:  "A 40x30 dot lattice displaced by two interfering wave sources on a Lissajous trajectory — no CPU, no memory, pure logic"
   language:     "Verilog"
-  clock_hz:     25175000       # Clock frequency in Hz (25.175 MHz for VGA)
+  clock_hz:     50350000       # 2× the 25.175 MHz VGA pixel rate; internal logic time-shares adders between A and B sources.
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"
@@ -22,11 +22,11 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: "palette[0]"
-  ui[1]: "palette[1]"
-  ui[2]: "ring_density[0]"
-  ui[3]: "ring_density[1]"
-  ui[4]: "speed"
+  ui[0]: ""
+  ui[1]: ""
+  ui[2]: ""
+  ui[3]: ""
+  ui[4]: ""
   ui[5]: ""
   ui[6]: ""
   ui[7]: ""
