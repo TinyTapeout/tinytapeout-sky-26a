@@ -9,16 +9,14 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Several basic test structures exist on chip for validation:
-
-- Inverter
-
-The primary structures for the chip
-
-- Two Tunable Differential Ring Oscillators (~1GHz)
-- 2 8-bit DACs for bias control
-- Gilbert Cell Mixer
+Structures currently implemented:
+- Inverter (Test Structure)
 - 3/4 Modulus Prescaler
+
+Structures still to be implemented:
+- Two Tunable Differential Ring Oscillators (~1GHz)
+- 2 8-bit CSDACs for bias tuning
+- Gilbert Cell Mixer
 - Accumulator with mux'd output bit
 - 12-bit counter with compare register
 - Serial interface for control
@@ -30,8 +28,10 @@ The primary structures for the chip
 
 ## How to test
 
-Explain how to use your project
+Input 7 is connected to Output 7 via an inverter, if this doesn't work there are bigger problems!
+
+Input 0 controls the division factor of a clock prescaler, and Output 0 will either be CLK/4 or CLK/3 to be verified using an Oscilloscope.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+- Oscilloscope 
