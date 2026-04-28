@@ -1,0 +1,63 @@
+# Tiny Tapeout project information
+project:
+  title:        "Linear and Logarithmic MACs"      # Project title
+  author:       "Yi-Ting Lin"      # Your name
+  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "MACs working in linear or log number system. Two implementations for log accumulator"      # One line description of what your project does
+  language:     "SystemVerilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_snrlxd1068_MACs"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "project.sv"
+    - "MAC_top.sv"
+    - "linear_mult.sv"
+    - "linear_accum.sv"
+    - "log_mult.sv"
+    - "log_accum_shift.sv"
+    - "log_accum_lut.sv"
+    - "lut_rom.sv"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "in_data[0]"
+  ui[1]: "in_data[1]"
+  ui[2]: "in_data[2]"
+  ui[3]: "in_data[3]"
+  ui[4]: "in_data[4]"
+  ui[5]: "in_data[5]"
+  ui[6]: "in_data[6]"
+  ui[7]: "in_data[7]"
+
+  # Outputs
+  uo[0]: "out_data[0]"
+  uo[1]: "out_data[1]"
+  uo[2]: "out_data[2]"
+  uo[3]: "out_data[3]"
+  uo[4]: "out_data[4]"
+  uo[5]: "out_data[5]"
+  uo[6]: "out_data[6]"
+  uo[7]: "out_data[7]"
+
+  # Bidirectional pins
+  uio[0]: "i_mode[0]"
+  uio[1]: "i_mode[1]"
+  uio[2]: "i_valid"
+  uio[3]: "i_key"
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+# Do not change!
+yaml_version: 6
