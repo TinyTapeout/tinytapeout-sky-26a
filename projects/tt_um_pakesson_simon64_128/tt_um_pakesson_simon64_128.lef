@@ -465,8 +465,6 @@ MACRO tt_um_pakesson_simon64_128
         RECT 101.320 13.095 134.490 223.680 ;
         RECT 136.890 13.095 137.790 223.680 ;
         RECT 140.190 13.095 157.945 223.680 ;
-      LAYER met5 ;
-        RECT 67.000 100.000 93.880 126.880 ;
   END
 END tt_um_pakesson_simon64_128
 END LIBRARY
