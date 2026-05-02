@@ -1,0 +1,54 @@
+# Tiny Tapeout project information
+project:
+  title:        "Tiny Blackjack"
+  author:       "AmitChen1415"
+  discord:      "amitchen_"
+  description:  "A VGA Blackjack game: deal, hit, stand, double, with on-screen cards and balance display."
+  language:     "Verilog"
+  clock_hz:     25000000
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  # VGA + simple game logic usually fits in 2x2 or 3x2 depending on how heavy the renderer is.
+  tiles: "1x2"
+
+  top_module:  "tt_um_AmitChen1415"
+
+  source_files:
+    - "tt_um_AmitChen1415.v"
+    - "blackjack_core.v"
+    - "blackjack_table.v"
+    - "vga_controller.v"
+    - "pwrup_synchronizer.v"
+
+pinout:
+  # Inputs
+  ui[0]: "HIT button"
+  ui[1]: "STAND button"
+  ui[2]: "DOUBLE button"
+  ui[3]: "Unused"
+  ui[4]: "START/DEAL button"
+  ui[5]: "Unused"
+  ui[6]: "Unused"
+  ui[7]: "Unused"
+
+  # Outputs (mapped in top to VGA signals)
+  uo[0]: "VGA_R[1]"
+  uo[1]: "VGA_G[1]"
+  uo[2]: "VGA_B[1]"
+  uo[3]: "VGA_VSYNC"
+  uo[4]: "VGA_R[0]"
+  uo[5]: "VGA_G[0]"
+  uo[6]: "VGA_B[0]"
+  uo[7]: "VGA_HSYNC"
+
+  # Bidirectional pins (unused)
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+yaml_version: 6
