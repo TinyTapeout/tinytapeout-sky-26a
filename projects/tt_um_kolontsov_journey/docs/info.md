@@ -1,21 +1,19 @@
-<!---
-
-This file is used to generate your project datasheet. Please fill in the information below and delete any unused
-sections.
-
-You can also include images in this folder and reference them in the markdown. Each image must be less than
-512 kb in size, and the combined size of all images must be less than 1 MB.
--->
-
 ## How it works
 
-Work in progress. VGA demo generating procedural visuals in real time, driven by a 25.175 MHz pixel clock.
+**Journey** is an intro in just 2 tiles: dark tunnels and a cat on a
+red balloon casting spells, bringing colors and joy, with chiptune
+music and a scrolling text overlay.
+
+![Journey](preview.png)
 
 ## How to test
 
-Connect the Tiny VGA Pmod to the output pins and select the design. The display should show a color pattern at 640x480 @ 60 Hz.
+Connect the Tiny VGA Pmod to the output and the TT Audio Pmod to the
+bidir pins. Apply a 25 MHz clock, pulse reset, and the demo starts
+automatically — VGA 640×480 @ 60 Hz on the display, 1-bit sigma-delta
+audio on `uio[7]`.
 
 ## External hardware
 
-- Tiny VGA Pmod
-- TT Audio Pmod
+- [Tiny VGA Pmod](https://github.com/mole99/tiny-vga)
+- [TT Audio Pmod](https://github.com/MichaelBell/tt-audio-pmod)

@@ -3,9 +3,9 @@ project:
   title:        "Journey"
   author:       "Vadim Kolontsov"
   discord:      "vk234"
-  description:  "VGA demo - colorful journey through procedural visuals"
+  description:  "Dark tunnels and a cat on a red balloon casting spells, bringing colors and joy, with chiptune music and a scroller"
   language:     "SystemVerilog"
-  clock_hz:     25175000
+  clock_hz:     25000000
 
   tiles: "1x2"
 
@@ -13,7 +13,26 @@ project:
 
   source_files:
     - "tt_um_kolontsov_journey.sv"
+    - "clk_gen.sv"
     - "vga_timing.sv"
+    - "pixel_shader.sv"
+    - "cordic.sv"
+    - "reciprocal.sv"
+    - "bayer_dither.sv"
+    - "palette.sv"
+    - "dim_fade.sv"
+    - "scroller.sv"
+    - "scroller_rom.sv"
+    - "intro_phase.sv"
+    - "cat_sprite.sv"
+    - "cat_speech.sv"
+    - "synth_engine.sv"
+    - "synth_patterns.sv"
+    - "synth_kick.sv"
+    - "synth_bass.sv"
+    - "synth_melody.sv"
+    - "synth_noise.sv"
+    - "sigma_delta.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
@@ -45,7 +64,7 @@ pinout:
   uio[4]: ""
   uio[5]: ""
   uio[6]: ""
-  uio[7]: ""
+  uio[7]: "audio_out"
 
 # Do not change!
 yaml_version: 6
