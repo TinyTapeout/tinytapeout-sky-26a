@@ -1,0 +1,74 @@
+# Tiny Tapeout project information
+project:
+  title:        "Project Long Man: A Delay-Insensitive Interconnect"      # Project title
+  author:       "TCL Tyrants"             # Your name
+  discord:      ""                         # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "A quasi-delay-insensitive die-to-die interconnect"      # One line description of what your project does
+  language:     "SystemVerilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     66000000       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_lm_chip_top"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "chip_top/lm_chip_top.sv"
+    - "chip_top/lm_SPI.sv"
+    - "lm_phy/clock_gate_low.sv"
+    - "lm_phy/decoder2_4.sv"
+    - "lm_phy/encoder4_2.sv"
+    - "lm_phy/reset_synchronizer.sv"
+    - "lm_phy/rx_shift_reg.sv"
+    - "lm_phy/toggle.sv"
+    - "lm_phy/delayline.sv"
+    - "lm_phy/lm_phy_tx.sv"
+    - "lm_phy/neg_pulse_generator.sv"
+    - "lm_phy/pos_pulse_generator.sv"
+    - "lm_phy/pulse_generator.sv"
+    - "lm_phy/sr_latch.sv"
+    - "lm_phy/tx_fsm.sv"
+    - "lm_phy/tx_shift_reg.sv"
+    - "lm_phy/lm_phy_rx.sv"
+    - "lm_phy/lm_phy_top.sv"
+    - "lm_phy/rx_fsm.sv"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "RX[0]"
+  ui[1]: "RX[1]"
+  ui[2]: "RX[2]"
+  ui[3]: "RX[3]"
+  ui[4]: "TX_ACK"
+  ui[5]: "LOAD"
+  ui[6]: "RDY"
+  ui[7]: "MOSI"
+
+  # Outputs
+  uo[0]: "TX[0]"
+  uo[1]: "TX[1]"
+  uo[2]: "TX[2]"
+  uo[3]: "TX[3]"
+  uo[4]: "RX_ACK"
+  uo[5]: "DONE"
+  uo[6]: "VLD"
+  uo[7]: "MISO"
+
+  # Bidirectional pins
+  uio[0]: "DBG_ADDR[0]"
+  uio[1]: "DBG_ADDR[1]"
+  uio[2]: "DBG_ADDR[2]"
+  uio[3]: "DBG_ADDR[3]"
+  uio[4]: ""
+  uio[5]: "DBG_OUT"
+  uio[6]: "SCLK"
+  uio[7]: "CAPTURE"
+
+# Do not change!
+yaml_version: 6
