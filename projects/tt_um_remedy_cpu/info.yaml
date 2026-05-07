@@ -29,8 +29,8 @@ pinout:
   ui[3]: "cpu input pin [3]"
   ui[4]: "cpu input pin [4]"
   ui[5]: "cpu input pin [5]"
-  ui[6]: "cpu input pin [6]"
-  ui[7]: "cpu input pin [7]"
+  ui[6]: "cpu input pin [6] /  Debug clock"
+  ui[7]: "cpu input pin [7] /  Debug Data In"
 
   # Outputs
   uo[0]: "cpu output pin [0]"
@@ -39,18 +39,18 @@ pinout:
   uo[3]: "cpu output pin [3]"
   uo[4]: "cpu output pin [4]"
   uo[5]: "cpu output pin [5]"
-  uo[6]: "cpu output pin [6]"
-  uo[7]: "cpu output pin [7]"
+  uo[6]: "cpu output pin [6] / I2c_scl"
+  uo[7]: "cpu output pin [7] / Debug Data Out"
 
   # Bidirectional pins
-  uio[0]: "spi_miso"
-  uio[1]: "spi_ram_cs"
-  uio[2]: "spi_flash_cs"
-  uio[3]: "spi_mosi"
-  uio[4]: "spi_sclk"
-  uio[5]: "I2c_sda"
-  uio[6]: "I2c_scl"
-  uio[7]: "not used"
+  uio[0]: "spi_flash_cs"
+  uio[1]: "spi_miso/Qdio[0]"
+  uio[2]: "spi_mosi/Qdio[1]"
+  uio[3]: "spi_sclk"
+  uio[4]: "Qdio[2]"
+  uio[5]: "Qdio[3]"
+  uio[6]: "spi_ram_cs"
+  uio[7]: "I2c_sda"
 
 # Do not change!
 yaml_version: 6
