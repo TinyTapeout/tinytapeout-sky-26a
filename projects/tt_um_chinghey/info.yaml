@@ -1,9 +1,9 @@
 # Tiny Tapeout project information
 project:
-  title: "Hey's Tiny NPU" # Project title
-  author: "Hey Lau" # Your name
+  title: "Hey FlexCompute-130" # Project title
+  author: "Ching Hey Lau" # Your name
   discord: "hheylau" # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description: "Tiny NPU (6-transistor) with SPI weight input & ReLU" # One line description of what your project does
+  description: "8-bit NPU with SPI weight & ReLU + 12-bit CORDIC SINH/COSH/ATAN" # One line description of what your project does
   language: "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz: 0 # Clock frequency in Hz (or 0 if not applicable)
 
@@ -50,8 +50,8 @@ pinout:
   # Bidirectional pins
   uio[0]: "spi_sclk" # Input from RP2040
   uio[1]: "spi_mosi" # Input (Weight data)
-  uio[2]: "spi_cs_n" # Input (Active Low)
-  uio[3]: "npu_busy" # Output to RP2040 (Handshake)
+  uio[2]: "spi_cs" # Input (Active Low)
+  uio[3]: "reset_acc" # reset accumulator or sin/cos
   uio[4]: "byte_sel" # Input: 0=LowByte, 1=HighByte
   uio[5]: "layer_done" # Output: Pulse when sum is finished
   uio[6]: "Active Mode[0]"
