@@ -19,6 +19,14 @@ project:
   source_files:
     - "project.v"
     - "hvsync_generator.v"
+    - "gamepad_pmod.v"
+    - "center_star_vga_manager.v"
+    - "simple_ship_movement_manager.v"
+    - "simple_ship_vga_manager.v"
+    - "simple_ship_wrapper.v"
+    - "vga_distance_from_center.v"
+    - "vga_offset_manager.v"
+
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
