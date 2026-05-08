@@ -16,6 +16,10 @@ project:
   
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:
+    - "audio.v"
+    - "gems.v"
+    - "dottee_logo.v"
+    - "circle_edge.v"
     - "project.v"
     - "hvsync_generator.v"
 
@@ -49,7 +53,7 @@ pinout:
   uio[4]: ""
   uio[5]: ""
   uio[6]: ""
-  uio[7]: ""
+  uio[7]: "audio_out"
 
 # Do not change!
 yaml_version: 6

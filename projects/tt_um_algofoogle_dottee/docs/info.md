@@ -9,12 +9,15 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Racing the beam, we use the power of MATHS to generate pretty pictures.
+This is my submission to the TTSKY26a Demoscene Competition, in the 1-tile category. Racing the beam, we use the power of MATHS to generate pretty pictures.
 
 ## How to test
 
-Just hook up a VGA monitor, supply a 25MHz clock, and reset it.
+Just hook up a VGA monitor, supply a 25MHz clock, and reset it. Use the [TT Audio PMOD](https://github.com/MichaelBell/tt-audio-pmod) to hear some music.
+
+It repeats after about 68 seconds.
 
 ## External hardware
 
-TinyVGA PMOD ought to be enough! Hopefully I'll have audio going soon too on `uio` via the TT Audio PMOD.
+*   [Tiny VGA PMOD](https://github.com/mole99/tiny-vga) for driving a VGA monitor.
+*   [TT Audio PMOD](https://github.com/MichaelBell/tt-audio-pmod) for mono sound.
