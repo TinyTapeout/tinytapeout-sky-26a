@@ -1,216 +1,434 @@
-<!---
 
-This file is used to generate your project datasheet. Please fill in the information below and delete any unused
-sections.
 
-You can also include images in this folder and reference them in the markdown. Each image must be less than
-512 kb in size, and the combined size of all images must be less than 1 MB.
--->
+# Remedy CPU / TinyCPU Datasheet
 
 ## How to test
 
-Using this custom IDE to compile assembly or cpp-ish code and upload it to the spi flash.
-[repo link here hopefully If I don't forget]
+Use the custom IDE/toolchain to assemble TinyCPU assembly, or the work-in-progress cpp-ish compiler, then upload the generated program image to the external flash. I am also working on a vscode extension to integrate these steps into a more user-friendly workflow. with code upload, flash programming, and serial debugging features hopefully. 
+
+[Here is the Repo link](https://github.com/leonidas213/Remedy-Compiler) : https://github.com/leonidas213/Remedy-Compiler
 ### Assembler
 ![image](assembler.png)
+
 ### Work in progress compiler
 ![image](compil_test.png)
 
 ## External hardware
 
-with PMOD or external spi flash/ram. Currently only use regular spi mode to communicate.
+The CPU uses external serial memory instead of internal program/data memory.
 
-## How it works
-Read program from spi flash and executes its instructions. Depending on the program it cna also use 1 ram. It will only use address 0x00000-0x1ffff. So it will use really small amount for both spi flash and ram.
-**OH You can only read/write to ram with half-words and also read flash with half-words**
-so if the memory at 0x00 is something like **0x3df12548** you can read **0x3df1** or **0x2548** but you can't read **0xf125**
+| Device | Mode used by current hardware | Purpose |
+|---|---|---|
+| SPI/QSPI Flash | QSPI continuous-read mode | Program fetch and `ldf` flash reads |
+| SPI RAM / PSRAM | Plain SPI mode | Data load/store |
 
-# CPU SPECS
-![image](cpu_arch.png)
-## Overview
-CPU SPECS
-External spi Flash up to 131kb
-External spi Ram up to 131kb
-(it can only use addresse between 0x00000-0x1FFFF)
+The CPU is a 16-bit design and only reads/writes memory in 16-bit half-words. CPU memory addresses are word addresses. Externally, the memory interface appends one zero bit to form byte addresses, so CPU address `0x0001` maps to external byte address `0x000002`.
 
-First you send read command to spi flash 
-Then send 16 bit program address from cpu
-Then read 16 bit opcode
-and after a clock cycle or two it will execute it.
-Rinse and repeat
-
-## SPI Fetch Timing
-    
-
--0x03 Read command(Write) [8 bits]
--Program Counter(Program Address)(Write)  [24 bits]
--Opcode(Operation code)(Read) [16 bits]
--3 clock cycle
-          
-
-
-
-Yeah i know it is slow but it is what it is :D
-Anyway here is the full cpu specs
-## Notes
-Total of **16** general purpouse registers that can hold 16 bit numbers
- or 13 general purpouse registers and stack pointer, branch pointer, return address registers
-
-- **A Random number generator (linear feedback shift register)** that generates 8 bit random numbers at every clock cycle but you need toset a seed first
-- **2 timers** with:
-    - **timer1** is **16-bit** and **timer2** is **8-bit**
-     - Auto Reload functionality after reaching the target value
-     - Interrupt generation upon reaching the target
-     - Capability to read the timer value
-     - Timer reset functionality
-     - 16-bit prescaler ranging from 1x (1 clock cycle per tick) to 32768x (32768 clock cycles per tick)
-
-- **I2C master** with:
-     - Raise an interrupt when finished transaction
-     - Not much tested clock s_____trecth support
-     - Ack Nack capability
-     - 16 bit Prescaler
-     - Write/Read operations
-     - Typical I2c master... but it can only hold 8 bit of data so it needs constant attention
-      For example lets say you want to read from device 0x58 and its 0x14th register
-        - Enable interrupt (otherwise you need to poll it)
-        - START command + ADDR(W) -> it finished sending it and raised an interrupt
-        - WRITE register addr     -> it finished sending it and raised an interrupt
-        - START command + ADDR(R) -> it finished sending it and raised an interrupt
-        - READ register content   -> it finished sending it and raised an interrupt
-        - then you copy the value from peripheral bus to cache registers.
-        - And then you can copy from cache registers to ram.
-
--**Arithmetic Logic Unit** (ALU) capabilities include:
-  - Addition
-  - Subtraction
-  - Bitwise AND
-  - Bitwise OR
-  - Bitwise XOR
-  - Bitwise NOT
-  - Negation
-  - Logical shift left
-  - Logical shift right
-  - Arithmetic shift right
-  - Byte swapping
-  - Nibble swapping
-  - ALU Flags: Negative, Zero, Carry
-
--**Immediate register** for storing 16-bit values
-
--**Jump instructions** supporting both absolute and relative addresses
-  abs(current address - target address) < 128 -> Relative jump - 1 cycle
-  abs(current address - target address) > 128 -> Absolute jump - 2 cycle
-
--Input pins can trigger interrupts (not edge-sensitive, shared interrupt line, global enable/disable) 
-  -Input pins can generate interrupt but it is not edge sensitive   
-  and it is not possible to disable interrupt for a specific pin
-  because all input pins share the same interrupt line
-  so the interrupt happens when any of the input pins change (and you don't know which one caused it)
-
--Interrupts can be enabled or disabled globally
-  Interrupt register to manage and read active interrupts (1 I2C master, 2 timers, 1 input pin)
-  - Interrupt register format:
-      |    15-4    |    3   |    2   |   1    |       0        |
-      |------------|--------|--------|--------|----------------|
-      |  always 0  |  I2C   | timer2 | timer1 | input Interrupt |
-  - When an interrupt happens you need to flip the bit on the interrupt register to 0
-  otherwise it will trigger an interrupt again.
-  - While returning from interrupt you need to use "**reti**"
-  - all interrupt use the same function address and it is hardcoded to **0x0002**
-  - When an interrupt happens if the current operation is not a immediate or ram write/read operation
-  it will record current pc and jump to **0x0002**. When you finish handling the interrupt use "**reti**" to continue
-  - if another interrupt happens for some reason it will not jump to **0x0002**. But as soon as you use "**reti**"
-  it will jump back to interrupt handler.
-  - Normally when an interrupt happens it will lock the interrupt bus so other interrupts doesn't happen.
-  well.... sometimes they don't listen....
-  
-
-
-
-
-
-## REGISTERS
+Usable external address range:
 
 ```text
-;---------- REGISTERS   -------------
-; this timer is 16-bit
-timer1Config = 2         ;5-bit    |    1 bit       |  1 bit  |    4 bit   | 1 bit  |  
-                         ; not used|Interrupt enable| reload  |  prescaler | enable |
- 
-timer1Target = 3         ; 16-bit target value for interrupt generation
-timer1Reset = 4          ; 1-bit reset timer
-timer1ReadAdr = 5        ; 16-bit
-
-; this timer is 8-bit
-timer2Config = 6         ; Similar configuration as timer1
-timer2Target = 7         ; 8-bit target value for timer2
-timer2Reset = 8          ; 1-bit reset timer2
-timer2ReadAdr = 9       ; 8-bit
-
-timerSyncStart = 10       ;1-bit, when set to 1, it starts all timers at the same time.
-; random number generator
-; RNG is always active at every clock cycle
-RandomSeedAddr = 11        ;16-bit seed location
-RandomReg = 12              ;Generated value
-
-; GPIO Registers
-OutputReg = 1          ; 8-bit data for GPIO pins
-InputReg = 0           ;8-bit data from GPIO pins 
-
-; Interrupt registers
-CpuinterruptEnable = 13       ; 1-bit
-InputInterruptEnable = 14   ;1-bit if 1, input pins interrupt is enabled
-InterruptRegister = 15      ;16-bit
-
-I2cCtrl = 16                   ; |    1 bit      |  1 bit     |  1 bit  |
-                               ;   strech enable | irq enable | enable  |
-I2cStatus = 17
-; |    1 bit    |    1 bit      |  1 bit     |  1 bit  |         1 bit         |        1 bit       |
-;  irq pending  | rx valid      | ack error  | done    | bus active(read only) | op busy (read only)
-I2cPrescaler = 18               ; 16-bit prescaler
-I2cDataReg = 19                 ; 8-bit, if you write to it it will be writen to the bus,
-                                ; if you read from it, it will give you the last read value from the bus.
-I2cCommand = 20                 ; when you want to write to the bus you can exxecute different commands
-; for example if you read multiple values with "cmd read" and
-; you want to finish it reading with "nack" you need to use "cmd read nack"
-; so the device that you are controlling will understand that you don't want to read anymore
-; ex:mpu6050
-; |    1 bit       |  1 bit   |  1 bit    |  1 bit    |  1 bit     |
-; |  cmd read nack | cmd read | cmd write |  cmd stop | cmd start  |
-
-
-
+CPU word address: 0x0000-0xFFFF
+External byte address used: 0x00000-0x1FFFF
+Effective byte range: 128 KiB per memory device
 ```
 
-## PROGRAMMING EXAMPLES
+Example: if flash byte memory starts with `0x3D F1 25 48`, the CPU can read `0x3DF1` at word address `0x0000` and `0x2548` at word address `0x0001`. It cannot directly read the unaligned half-word `0xF125`.
+
+## Pin usage
+
+| Pin group | Use |
+|---|---|
+| `ui_in[5:0]` | General input pins |
+| `ui_in[6]` | Debug serial data input |
+| `ui_in[7]` | Debug serial clock input |
+| `uo_out[5:0]` | General output pins from `OutputReg[5:0]` |
+| `uo_out[6]` | General output `OutputReg[6]`, or I2C SCL when I2C is active |
+| `uo_out[7]` | General output `OutputReg[7]`, or debugger data output when debugger drives it |
+| `uio[0]` | Flash CS |
+| `uio[1]` | Flash/RAM IO0 / MOSI |
+| `uio[2]` | Flash/RAM IO1 / MISO |
+| `uio[3]` | Shared serial clock |
+| `uio[4]` | Flash IO2 |
+| `uio[5]` | Flash IO3 |
+| `uio[6]` | RAM CS |
+| `uio[7]` | I2C SDA |
+
+## Memory interface
+
+### Startup flash initialization
+
+At reset the memory interface initializes the flash before the CPU can fetch instructions. The current startup sequence is:
+
+```text
+0x66              ; flash reset enable
+0x99              ; flash reset
+0x06              ; write enable
+0x31 0x02         ; set status/config register 2, enable quad mode
+0xEB              ; enter QSPI fast-read/continuous-read path
+0x00 0x00 0x00 0xA0 0x00 0x00
+                  ; address 0, mode bits A0, dummy clocks
+```
+
+RAM reset/init was removed to save area. RAM CS stays high during flash initialization.
+
+### Runtime flash read
+
+Flash is treated as read-only by this memory interface. Runtime flash access uses QSPI continuous read:
+
+```text
+CS low
+24-bit byte address = {7'b0, cpu_addr[15:0], 1'b0}
+2 QSPI mode nibbles: A, 0
+4 QSPI dummy clocks
+4 QSPI data clocks = 16-bit word
+CS high
+```
+
+The external SPI/QSPI clock toggles every system clock, so one external serial clock period is two system clock cycles.
+
+### Runtime RAM read/write
+
+RAM uses normal SPI:
+
+```text
+Read command  = 0x03
+Write command = 0x02
+24-bit byte address = {1'b0, 6'b0, cpu_addr[15:0], 1'b0}
+16-bit data word
+```
+
+Flash writes are intentionally blocked in the current memory wrapper.
+
+# CPU specs
+
+![image](cpu_arch.png)
+
+## Overview
+
+- 16-bit CPU datapath
+- 16 general purpose 16-bit registers
+- `r13`/`BP`, `r14`/`SP`, and `r15`/`RA` are conventionally used as branch pointer, stack pointer, and return address, but they are still can be used as normal registers
+- 16-bit instruction words
+- Immediate words have MSB = 1 and load the immediate register instead of executing as a normal opcode
+- External flash and RAM are accessed only as 16-bit half-words
+- ALU flags: Negative, Zero, Carry
+- Fixed interrupt vector: `0x0002`
+- Debugger supports halt/run/step, one dynamic breakpoint, static `brk`, and jump/load-PC
+
+## Immediate format
+
+Any fetched word with bit 15 set is treated as an immediate word. It updates the immediate register and does not execute as a normal instruction. The following real instruction can then consume that immediate value.
+
+Example concept:
 
 ```asm
-; ---------- PROGRAMMING EXAMPLES -----------
-; Example 1: Basic addition and store result in memory
-; Load immediate values into registers and add them
-;
-; ldi r1, 0x12            ; Load 0x12 into r1
-; ldi r2, 0x20            ; Load 0x20 into r2
-; add r1, r2              ; Add r1 and r2, store result in r1
-; st r1, 0x1000          ; Store result from r1 into memory address 0x1000
-; putoutput r1            ; Output result from r1 [only lower 8 bits]
+; Assembly:
+jump 0xF123
 
-; Example 2: Timer configuration
-; ldi r1, 0x01            ; Enable timer into r1
-; ldi r2, 0x1000          ; Load target value into r2
-; out timer1Config, r1    ; Enable timer1 with prescaler value 1x with no reload and no interrupt
-; out timer1Target, r2    ; Set timer1 target value
-; loop:
-;    in  r1, timer1ReadAdr   ; Read timer1 value
-;    putoutput r1            ; Output timer1 value [only lower 8 bits]
-;    jump loop               ; Loop indefinitely
+; Encoded as two 16-bit words:
+0xF123     ; immediate word
+0x3C01     ; absolute jump instruction using the immediate register/sign bit field
+```
+
+This is why the debugger can also inject multi-word commands by feeding the same 16-bit words the flash would have returned.
+
+## Timers
+
+There are two timers:
+
+| Timer | Counter width | Target width | Read address |
+|---|---:|---:|---:|
+| Timer 1 | 16-bit | 16-bit | `timer1ReadAdr = 5` |
+| Timer 2 | 9-bit | 9-bit | `timer2ReadAdr = 9` |
+
+Timer 2 is called the tiny timer in the RTL, but it is currently 9-bit, not 8-bit.
+
+Both timers use the same 8-bit config layout:
+
+| Bit(s) | Name | Meaning |
+|---:|---|---|
+| `[0]` | enable | Enables the timer |
+| `[4:1]` | prescaler | Prescaler select |
+| `[5]` | auto reload | When target matches, reset count to zero instead of staying at target |
+| `[6]` | IRQ enable | Timer asserts interrupt when target matches |
+
+Prescaler encoding:
+
+| Value | Divide |
+|---:|---:|
+| 0 | `/1` |
+| 1 | `/2` |
+| 2 | `/4` |
+| 3 | `/8` |
+| 4 | `/16` |
+| 5 | `/32` |
+| 6 | `/64` |
+| 7 | `/128` |
+| 8 | `/256` |
+| 9 | `/512` |
+| 10 | `/1024` |
+| 11 | `/2048` |
+| 12-15 | reserved/currently behaves like `/1` |
 
 
+Examples:
+
+| Source | Prescaler | Timer tick |
+|---|---:|---:|
+| System clock | `/2048` | 81.92 us |
+
+
+Max overflow times with `/2048`:
+
+| Timer | System clock source |
+|---|---:|
+| 16-bit timer | about 5.37 s |
+| 9-bit timer | about 41.94 ms |
+
+Notes:
+
+- A target value of zero disables match detection because the RTL uses `target != 0` as `target_valid`.
+- During interrupt lock (`InterLock`), the timer count does not advance. The prescaler can still advance when the timer is enabled.
+- Writing to the timer reset address with bit 0 set clears count, clears prescaler, and clears timer config.
+- Writing `timerSyncStart` updates bit 0, the enable bit, of both timer configs at the same time.
+
+## Interrupts
+
+The interrupt system uses one fixed interrupt vector and software dispatch:
+
+```text
+Interrupt vector = 0x0002
+Return instruction = reti
+```
+
+Interrupt sources:
+
+| Bit | Source |
+|---:|---|
+| 0 | Timer 1 |
+| 1 | Timer 2 |
+| 2 | I2C |
+
+There is no separate per-input-pin interrupt source in the current top-level wiring.
+
+Interrupt registers:
+
+| Address | Name | Write behavior | Read behavior |
+|---:|---|---|---|
+| 13 | `CpuinterruptEnable` | bit 0 = global interrupt enable | bit 0 = global enable, bit 1 = IRQ lock, bit 2 = active interrupt request |
+| 14 | `InputInterruptEnable` | bits `[2:0]` = IRQ source enable mask | current IRQ enable mask |
+| 15 | `InterruptRegister` | write 1s to clear pending bits | current pending bits |
+
+Important behavior:
+
+- IRQ requests are latched into pending bits.
+- `InterruptRegister` is write-one-to-clear.
+- Interrupts are blocked while `imm` is active, so an interrupt should not break an immediate word plus the following immediate-consuming instruction.
+- Once an interrupt is taken, the controller locks until `reti` is executed.
+- If another source becomes pending while locked, it remains pending and can trigger after `reti` if still enabled.
+
+A typical ISR should read `InterruptRegister`, handle each set bit, clear the handled bits by writing 1s back to `InterruptRegister`, then execute `reti`.
+
+## I2C master
+
+The I2C block is now a small fixed-speed master. It does not use the old programmable 16-bit prescaler anymore.
+
+Approximate SCL rate:
+
+```text
+SCL ≈ clk / (3 * (I2C_DIV + 1))
+I2C_DIV = 20
+At 25 MHz: SCL ≈ 397 kHz
+```
+
+I2C register map:
+
+| CPU address | Lower I2C reg | Name | Description |
+|---:|---:|---|---|
+| 16 | 0 | `I2cCtrl` | bit 0 = enable, bit 1 = IRQ enable |
+| 17 | 1 | `I2cStatus` | bit 0 busy, bit 1 bus active, bit 2 done, bit 3 ack error, bit 4 rx valid, bit 5 interrupt pending/done |
+| 18 | 2 | `I2cDivider` / legacy `I2cPrescaler` | read-only divider value, currently 20 |
+| 19 | 3 | `I2cDataReg` | write TX byte / read RX byte |
+| 20 | 4 | `I2cCommand` | command bits |
+
+`I2cStatus` sticky bits are cleared by writing 1s:
+
+| Status bit | Clear behavior |
+|---:|---|
+| 2 | write 1 to clear `done` |
+| 3 | write 1 to clear `ack_error` |
+| 4 | write 1 to clear `rx_valid` |
+
+Command register bits:
+
+| Bit | Command |
+|---:|---|
+| 0 | START |
+| 1 | STOP |
+| 2 | WRITE byte |
+| 3 | READ byte |
+| 4 | NACK after read |
+
+You can combine bits, for example START+WRITE for address phase, READ+NACK+STOP for the final byte of a read transaction.
+
+## Debugger
+
+The debug serial frontend receives 32-bit frames using the debug clock and debug data input:
+
+```text
+8'hA5 sync + 4-bit command + 4-bit register address + 16-bit data
+```
+
+Commands:
+
+| Command | Meaning |
+|---:|---|
+| 0 | Ping |
+| 1 | Read debug register |
+| 2 | Write debug register |
+
+Responses are 16-bit:
+
+| Response | Meaning |
+|---:|---|
+| `0xDB12` | Ping response |
+| `0xACCE` | Write accepted |
+| read data | Read command response |
+| `0xEEEE` | Invalid/error response |
+
+Debug registers:
+
+| Reg | Name | Description |
+|---:|---|---|
+| 0 | ID | reads `0xDB11` |
+| 1 | STATUS | bit 0 halt request, bit 1 jump pending, bit 3 halted, bit 4 debug enable, bit 5 static break enable, bit 6 breakpoint enable, bit 7 resume mask |
+| 2 | CONTROL | bit 0 debug enable, bit 1 halt request, bit 2 run pulse, bit 3 step pulse, bit 5 static break enable, bit 6 jump/load-PC request |
+| 3 | FLAGS | bit 0 Negative, bit 1 Zero, bit 2 Carry |
+| 4 | PC | current program counter |
+| 5 | IR | current instruction register |
+| 6 | BP0 | dynamic breakpoint address |
+| 7 | BPCTRL | bit 0 enables BP0 |
+| 8 | JUMP_ADDR | address used by CONTROL bit 6 |
+
+Only one dynamic breakpoint is currently implemented. The static breakpoint instruction is opcode `0x49` / `brk`; it only halts when static break is enabled.
+
+## Register map
+
+```text
+InputReg               = 0    ; 16-bit read, lower 8 bits contain input pins/debug pins
+OutputReg              = 1    ; 8-bit output register
+
+timer1Config           = 2    ; 8-bit timer config
+timer1Target           = 3    ; 16-bit target
+timer1Reset            = 4    ; write bit 0 = reset timer1
+timer1ReadAdr          = 5    ; read 16-bit timer1 count
+
+timer2Config           = 6    ; 8-bit timer config
+timer2Target           = 7    ; 9-bit target
+timer2Reset            = 8    ; write bit 0 = reset timer2
+timer2ReadAdr          = 9    ; read 9-bit timer2 count, zero-extended
+
+timerSyncStart         = 10   ; write bit 0 to update enable bit of both timers
+
+RandomSeedAddr         = 11   ; write 8-bit RNG seed
+RandomReg              = 12   ; read generated random value
+
+CpuinterruptEnable     = 13   ; global interrupt control/status
+InputInterruptEnable   = 14   ; IRQ source enable mask, legacy name
+InterruptRegister      = 15   ; IRQ pending register, write-one-to-clear
+
+I2cCtrl                = 16
+I2cStatus              = 17
+I2cDivider             = 18   ; fixed divider readback, legacy name I2cPrescaler
+I2cDataReg             = 19
+I2cCommand             = 20
+```
+
+## Programming examples
+
+### Basic addition and store
+
+```asm
+ldi r1, 0x12
+ldi r2, 0x20
+add r1, r2
+st 0x1000, r1
+putoutput r1
+```
+
+### Timer 1, system-clock source, `/2048`, IRQ enabled, auto reload enabled
+
+Config value:
+
+```text
+irq=1, reload=1, prescaler=11, enable=1
+config = (1<<6) | (1<<5) | (11<<1) | 1 = 0x77
+```
+
+```asm
+ldi r1, 0x77
+out timer1Config, r1
+ldi r1, 1000
+out timer1Target, r1
+```
+
+### Timer 2, `/2048`, IRQ enabled, auto reload enabled
+
+Config value:
+
+```text
+irq=1, reload=1, prescaler=11, enable=1
+config = (1<<6) | (1<<5) | (11<<1) | 1 = 0xF7
+```
+
+```asm
+ldi r1, 0xF7
+out timer2Config, r1
+ldi r1, 511
+out timer2Target, r1
+```
+
+### Interrupt handler skeleton
+
+```asm
+jump main
+nop
+interrupt_handler: ;at memory address 0x0002
+    in r0, InterruptRegister
+
+    ; timer1 pending?
+    mov r1, r0
+    and r1, 1
+    jumpZero check_timer2
+    ; handle timer1 here
+    ldi r1, 1
+    out InterruptRegister, r1
+
+check_timer2:
+    mov r1, r0
+    and r1, 2
+    jumpZero check_i2c
+    ; handle timer2 here
+    ldi r1, 2
+    out InterruptRegister, r1
+
+check_i2c:
+    mov r1, r0
+    and r1, 4
+    jumpZero irq_done
+    ; handle i2c here
+    ldi r1, 4
+    out InterruptRegister, r1
+
+irq_done:
+    reti
+
+main:
+    ; main program here
+    jump main
 ```
 
 # Opcode Table
-
 
 | Opcode | Instruction | Description |
 |---|---|---|
@@ -263,19 +481,19 @@ I2cCommand = 20                 ; when you want to write to the bus you can exxe
 | `0x2E` | `st u4, rd` | Stores the content of register Rs to memory at the location given by [const] from Ram. |
 | `0x2F` | `ld rd, i16` | Loads the memory value at the location given by [const] to register Rd from Ram. |
 | `0x30` | `ld rd, u4` | Loads the memory value at the location given by [const] to register Rd from Ram. |
-| `0x31` | `st [rd + value], rs` | Stores the content of register Rs to the memory at the address (Rd+[const]) from Ram. |
-| `0x32` | `ld rd, [rs + value]` | Loads the value at memory address (Rs+[const]) to register Rd from Ram. |
+| `0x31` | `st [rd +- value], rs` | Stores the content of register Rs to the memory at the address (Rd+[const]) from Ram. |
+| `0x32` | `ld rd, [rs +- value]` | Loads the value at memory address (Rs+[const]) to register Rd from Ram. |
 | `0x33` | `Reserved` | |
 | `0x34` | `jumpCarry i8` | Jump if Carry flag is set. (Relative, max jump +-128).  |
 | `0x35` | `jumpZero i8` | Jump if Zero flag is set. (Relative, max jump +-128).    |
 | `0x36` | `jumpNegative i8` |  Jump if Negative flag is set. (Relative, max jump +-128).   |
-| `0x37` | `jumpNotCarry i8` |  Jump if Carry flag is set. (Relative, max jump +-128).   |
-| `0x38` | `jumpNotZero i8` |  Jump if Zero flag is set. (Relative, max jump +-128).   |
-| `0x39` | `jumpNotNegative i8` |  Jump if Negative flag is set. (Relative, max jump +-128).   |
+| `0x37` | `jumpNotCarry i8` | Jump if Carry flag is not set. Relative jump. |
+| `0x38` | `jumpNotZero i8` | Jump if Zero flag is not set. Relative jump. |
+| `0x39` | `jumpNotNegative i8` | Jump if Negative flag is not set. Relative jump. |
 | `0x3A` | `rcall rd, i16` |  store current value to the Rd register and jump to immediate value. |
-| `0x3B` | `rret rs` |   |
+| `0x3B` | `rret rs` | Return/jump to the address stored in register Rs. |
 | `0x3C` | `jump i16` | absolute Jump to memory address. |
-| `0x3D` | `jump i16` | relative Jump to memory address if address are between +-128. |
+| `0x3D` | `jump i8` | Relative jump using signed offset. Assembler chooses this when possible. |
 | `0x3E` | `out i16, rs` | writes Rd register value to the immediate address.  |
 | `0x3F` | `out u4, rs` |  writes Rd register value to the immediate address. |
 | `0x40` | `outr [rd], rs` |  writes Rd value to the adress in the Rs register. |
@@ -286,6 +504,6 @@ I2cCommand = 20                 ; when you want to write to the bus you can exxe
 | `0x45` | `ldf rd, [rs]` | Reads the value at Rs value address into Rd from flash memory.  |
 | `0x46` | `ldf rd, i16` | Reads the immediate address into Rd from flash memory.  |
 | `0x47` | `ldf rd, u4` | Reads the immediate address into Rd from flash memory.  |
-| `0x48` | `ldf rd, [rs + value]` | Loads the value at memory address (Rs+[const]) to register Rd from flash memory.  |
-
+| `0x48` | `ldf rd, [rs +- value]` | Loads the value at memory address (Rs+-[const]) to register Rd from flash memory.  |
+| `0x49` | `brk` | Static breakpoint instruction. Only halts when debugger static break is enabled. |
 
