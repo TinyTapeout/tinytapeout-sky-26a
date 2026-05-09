@@ -13,7 +13,7 @@ TODO
 
 ## How to test
 
-Plug in a [TinyVGA](https://github.com/mole99/tiny-vga) compatible Pmod on the TT08 demo board's out Pmod.
+Plug in a [TinyVGA](https://github.com/mole99/tiny-vga) compatible Pmod on the demo board's out Pmod.
 Plug in a Pmod compatible with [Mike's audio Pmod](https://github.com/MichaelBell/tt-audio-pmod) on the TT08 demo board's bidir Pmod.
 Set all inputs to zero to get the default behavior.
 The demo starts directly after reset.
