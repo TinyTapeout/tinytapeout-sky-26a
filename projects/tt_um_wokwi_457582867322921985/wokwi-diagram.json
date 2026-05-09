@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "author": "Uri Shaked",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-dip-switch-8",
+      "id": "sw1",
+      "top": -176.5,
+      "left": -161.7,
+      "rotate": 90,
+      "attrs": {}
+    },
+    { "type": "wokwi-gnd", "id": "pwr2", "top": -76.8, "left": 565.8, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "pwr1", "top": -239.24, "left": -172.8, "attrs": {} },
+    {
+      "type": "board-tt-block-input",
+      "id": "ttin",
+      "top": -228.13,
+      "left": 4.8,
+      "attrs": { "verilogRole": "input" }
+    },
+    {
+      "type": "board-tt-block-output",
+      "id": "ttout",
+      "top": -208.93,
+      "left": 388.8,
+      "attrs": { "verilogRole": "output" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -234,
+      "left": 580.2,
+      "attrs": { "color": "red", "flip": "1" }
+    },
+    { "type": "wokwi-gnd", "id": "pwr3", "top": -67.2, "left": 575.4, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd1", "top": -105.6, "left": 220.2, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -272.4,
+      "left": 196.2,
+      "attrs": { "color": "white", "flip": "1" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": -195.6,
+      "left": 186.6,
+      "attrs": { "color": "purple", "flip": "1" }
+    },
+    { "type": "wokwi-gate-nand-2", "id": "nand1", "top": -201.6, "left": 249.6, "attrs": {} }
+  ],
+  "connections": [
+    [ "pwr1:VCC", "sw1:8a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:7a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:6a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:5a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:4a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:1a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:2a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:3a", "red", [ "v0" ] ],
+    [ "sw1:1b", "ttin:EXTIN0", "white", [ "h0" ] ],
+    [ "sw1:2b", "ttin:EXTIN1", "purple", [ "h0" ] ],
+    [ "led1:C", "pwr2:GND", "green", [ "v0" ] ],
+    [ "ttin:IN1", "led3:A", "purple", [ "h0" ] ],
+    [ "nand1:OUT", "ttout:OUT0", "red", [ "v0" ] ],
+    [ "ttout:EXTOUT0", "led1:A", "red", [ "v0" ] ],
+    [ "led3:C", "gnd1:GND", "black", [ "v0" ] ],
+    [ "led2:C", "gnd1:GND", "black", [ "v0" ] ],
+    [ "ttin:IN0", "led2:A", "white", [ "h0" ] ],
+    [ "led2:A", "nand1:A", "white", [ "v0" ] ],
+    [ "led3:A", "nand1:B", "purple", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
