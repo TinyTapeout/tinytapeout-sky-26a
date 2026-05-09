@@ -1,0 +1,49 @@
+# Tiny Tapeout project information (Wokwi project)
+project:
+  wokwi_id:     457571158413106177       # 
+  title:        "Tiny Tapeout 2026/03/04 Template Copy"      # 
+  author:       "Thusith Rathnayake Ralalage"      # 
+  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "Tiny Tapeout 7 segment decoder"      # 
+  language:     "Wokwi" # 
+  clock_hz:     0       # 0
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "input1"
+  ui[1]: "input2"
+  ui[2]: "input3"
+  ui[3]: "input4"
+  ui[4]: "input5"
+  ui[5]: "input6"
+  ui[6]: "input7"
+  ui[7]: "input8"
+
+  # Outputs
+  uo[0]: "seg_A"
+  uo[1]: "seg_B"
+  uo[2]: "seg_C"
+  uo[3]: "seg_D"
+  uo[4]: "seg_E"
+  uo[5]: "seg_F"
+  uo[6]: "seg_G"
+  uo[7]: "seg_DP"
+
+  # Bidirectional pins
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+# Do not change!
+yaml_version: 6
