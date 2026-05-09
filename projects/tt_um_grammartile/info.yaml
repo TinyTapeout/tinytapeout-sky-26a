@@ -1,0 +1,58 @@
+# Tiny Tapeout project information
+# Schema: https://tinytapeout.com/specs/
+project:
+  title:        "GrammarTile"
+  author:       "Plawan Rath"
+  discord:      ""
+  description:  "Byte-level pushdown-automaton coprocessor with a baked JSON grammar"
+  language:     "Verilog"
+  clock_hz:     50000000
+
+  # 2x2 = 4 tiles, ~4k gates. The block-diagram budget (~2k gates / ~130 FFs) fits in 2 tiles
+  # on Sky130; we ask for 2x2 for routing headroom + the parallel-byte fast path on `uio`.
+  tiles:        "2x2"
+
+  top_module:   "tt_um_grammartile"
+
+  source_files:
+    - tt_um_grammartile.v
+    - spi_slave.v
+    - char_class.v
+    - nfa_engine.v
+    - pda_stack.v
+
+# Pin assignments. See docs/info.md and docs/architecture.md for the
+# rationale behind each pin.
+pinout:
+  # ─── 8 dedicated inputs ───────────────────────────────────────────────
+  ui[0]: "SPI SCK"
+  ui[1]: "SPI MOSI"
+  ui[2]: "SPI CS_N (active low)"
+  ui[3]: "mode_sel (0=SPI, 1=parallel byte-in fast path)"
+  ui[4]: "par_strobe (parallel byte-in latch, mode_sel=1)"
+  ui[5]: "reserved"
+  ui[6]: "reserved"
+  ui[7]: "reserved"
+
+  # ─── 8 dedicated outputs ──────────────────────────────────────────────
+  uo[0]: "SPI MISO (status byte readback)"
+  uo[1]: "accept (combinational, low-latency)"
+  uo[2]: "ready (engine idle, ok to issue next command)"
+  uo[3]: "error (stack overflow / underflow / invalid byte)"
+  uo[4]: "dbg NFA state[0]"
+  uo[5]: "dbg NFA state[1]"
+  uo[6]: "dbg NFA state[2]"
+  uo[7]: "dbg NFA state[3]"
+
+  # ─── 8 bidirectional ──────────────────────────────────────────────────
+  uio[0]: "parallel byte-in[0] / QSPI IO0 (future)"
+  uio[1]: "parallel byte-in[1] / QSPI IO1 (future)"
+  uio[2]: "parallel byte-in[2] / QSPI IO2 (future)"
+  uio[3]: "parallel byte-in[3] / QSPI IO3 (future)"
+  uio[4]: "parallel byte-in[4] / QSPI SCK (future)"
+  uio[5]: "parallel byte-in[5] / QSPI CS_N (future)"
+  uio[6]: "parallel byte-in[6] / reserved"
+  uio[7]: "parallel byte-in[7] / reserved"
+
+# Yaml schema version — keep pinned to the version Tiny Tapeout's tooling expects.
+yaml_version: 6
