@@ -1,0 +1,48 @@
+project:
+  title:        "Algorithmic Pattern Generator"
+  author:       "Olonade Kelvin"
+  discord:      "Olonade Kelvin"
+  description:  "A fully autonomous VGA visual synthesizer with audio, driven by pure logic gates and LFSR."
+  how_it_works: "VGA timing generator creates 640x480@60Hz. Render engine computes pixel colors from (x,y,t) using 8 hardwired bitwise equations. An LFSR autonomously changes patterns, shift amounts, and color palettes every second. Audio bytebeat is output during blanking intervals."
+  how_to_test:  "Apply 25 MHz clock, reset briefly. Connect uo[7:6] to VGA sync, uo[5:0] to resistor DAC for RGB. Connect uio[7:0] to audio DAC/amplifier. Image appears on VGA monitor and sounds morph over time."
+  language:     "Verilog"
+  clock_hz:     25000000       # 25 MHz for 640x480 VGA
+  tiles:        "1x1"          
+  top_module:   "tt_um_demoscenettsky" 
+  source_files:
+    - "project.v"
+
+# Pin assignments for the Platinum VGA + Audio design
+pinout:
+  # Inputs (not actively used by autonomous mode, available for override)
+  ui[0]: "Manual override (unused)"
+  ui[1]: "Manual override (unused)"
+  ui[2]: "Manual override (unused)"
+  ui[3]: "Manual override (unused)"
+  ui[4]: "Unused"
+  ui[5]: "Unused"
+  ui[6]: "Unused"
+  ui[7]: "Unused"
+
+  # Outputs (dedicated VGA + sync)
+  uo[0]: "Red LSB"
+  uo[1]: "Red MSB"
+  uo[2]: "Green LSB"
+  uo[3]: "Green MSB"
+  uo[4]: "Blue LSB"
+  uo[5]: "Blue MSB"
+  uo[6]: "Hsync"
+  uo[7]: "Vsync"
+
+  # Bidirectional pins (audio during blanking)
+  uio[0]: "Audio bit 0"
+  uio[1]: "Audio bit 1"
+  uio[2]: "Audio bit 2"
+  uio[3]: "Audio bit 3"
+  uio[4]: "Audio bit 4"
+  uio[5]: "Audio bit 5"
+  uio[6]: "Audio bit 6"
+  uio[7]: "Audio bit 7"
+
+# Do not change!
+yaml_version: 6
