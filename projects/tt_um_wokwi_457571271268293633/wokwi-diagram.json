@@ -72,7 +72,7 @@
       "attrs": { "value": "1000" }
     },
     { "type": "wokwi-vcc", "id": "pwr5", "top": -325.64, "left": -230.4, "attrs": {} },
-    { "type": "wokwi-gate-xor-2", "id": "xor1", "top": -316.8, "left": 163.2, "attrs": {} },
+    { "type": "wokwi-gate-xor-2", "id": "xor1", "top": -297.6, "left": 134.4, "attrs": {} },
     { "type": "wokwi-mux-2", "id": "mux1", "top": -220.8, "left": 220.8, "attrs": {} },
     { "type": "wokwi-gate-not", "id": "not1", "top": -153.6, "left": 172.8, "attrs": {} },
     { "type": "wokwi-gate-not", "id": "not2", "top": -124.8, "left": 182.4, "attrs": {} },
