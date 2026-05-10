@@ -2,7 +2,7 @@
 project:
   title:        "Digital"      # Project title
   author:       "Julia Desmazes"      # Your name
-  discord:      "__essen"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  discord:      "essen__"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Slow 33MHz analog oscillator."      # One line description of what your project does
   language:     "Analog" # other examples include Verilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
