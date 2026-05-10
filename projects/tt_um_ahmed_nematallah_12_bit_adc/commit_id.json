@@ -1,8 +1,8 @@
 {
   "app": "custom_gds action",
   "repo": "https://github.com/Ahmed-Nematallah/12-bit-adc",
-  "commit": "4d016ebaa7ca403bb87ae5eb828b0415cb12808f",
-  "workflow_url": "https://github.com/Ahmed-Nematallah/12-bit-adc/actions/runs/25608776475",
+  "commit": "75c82e98b048e2a7d3dd039ec3513631df905cac",
+  "workflow_url": "https://github.com/Ahmed-Nematallah/12-bit-adc/actions/runs/25622388128",
   "project_id": 4332,
   "sort_id": 1778353719677,
   "analog": true

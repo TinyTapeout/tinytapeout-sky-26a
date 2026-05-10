@@ -2,7 +2,7 @@
 project:
   title:        "12-bit ADC"      # Project title
   author:       "Ahmed Nematallah"      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  discord:      "Ahmed.Nematallah"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "12-bit ADC"      # One line description of what your project does
   language:     "Analog" # other examples include Verilog, Amaranth, VHDL, etc
   clock_hz:     30000000       # Clock frequency in Hz (or 0 if not applicable)
@@ -26,7 +26,7 @@ project:
 pinout:
   # Inputs
   ui[0]: "RST"
-  ui[1]: "nc"
+  ui[1]: "CLK_SEL"
   ui[2]: "nc"
   ui[3]: "nc"
   ui[4]: "nc"
@@ -35,24 +35,24 @@ pinout:
   ui[7]: "nc"
 
   # Outputs
-  uo[0]: "B0"
-  uo[1]: "B1"
-  uo[2]: "B2"
-  uo[3]: "B3"
-  uo[4]: "B4"
-  uo[5]: "B5"
-  uo[6]: "B6"
-  uo[7]: "B7"
+  uo[0]: "nc"
+  uo[1]: "nc"
+  uo[2]: "RST"
+  uo[3]: "CMPOUT"
+  uo[4]: "B11"
+  uo[5]: "B10"
+  uo[6]: "B9"
+  uo[7]: "B8"
 
   # Bidirectional pins
-  uio[0]: "B8"
-  uio[1]: "B9"
-  uio[2]: "B10"
-  uio[3]: "B11"
-  uio[4]: "B00"
-  uio[5]: "NC"
-  uio[6]: "NC"
-  uio[7]: "NC"
+  uio[0]: "B7"
+  uio[1]: "B6"
+  uio[2]: "B5"
+  uio[3]: "B4"
+  uio[4]: "B3"
+  uio[5]: "B2"
+  uio[6]: "B1"
+  uio[7]: "B0"
 
   # Analog pins - make sure to also set "analog_pins" above, else the pins won't be connected
   ua[0]: "AIN"
