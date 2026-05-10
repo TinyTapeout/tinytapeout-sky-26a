@@ -1,0 +1,66 @@
+# Tiny Tapeout project information
+project:
+  title: "Titan Proccesing Unit (TPU)" # Project title
+  author: "SPC Engineering Club" # Your name
+  discord: "acrazt01" # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description: "16-bit computer with SPI memory based on the Nand2Tetris course." # One line description of what your project does
+  language: "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz: 66500000 # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x2" # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module: "tt_um_Acrazt05_titan_proccesing_unit"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "project.v"
+    - "computer.v"
+    - "cpu.v"
+    - "memory_router.v"
+    - "spi_memory.v"
+    - "gpio.v"
+    - "uio.v"
+    - "register_16.v"
+    - "pc.v"
+    - "alu.v"
+#    - "spi_ram_sim.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "GENERAL PURPOSE INPUT [0]"
+  ui[1]: "GENERAL PURPOSE INPUT [1]"
+  ui[2]: "GENERAL PURPOSE INPUT [2]"
+  ui[3]: "GENERAL PURPOSE INPUT [3]"
+  ui[4]: "GENERAL PURPOSE INPUT [4]"
+  ui[5]: "GENERAL PURPOSE INPUT [5]"
+  ui[6]: "GENERAL PURPOSE INPUT [6]"
+  ui[7]: "GENERAL PURPOSE INPUT [7]"
+
+  # Outputs
+  uo[0]: "GENERAL PURPOSE OUTPUT [0]"
+  uo[1]: "GENERAL PURPOSE OUTPUT [1]"
+  uo[2]: "GENERAL PURPOSE OUTPUT [2]"
+  uo[3]: "GENERAL PURPOSE OUTPUT [3]"
+  uo[4]: "GENERAL PURPOSE OUTPUT [4]"
+  uo[5]: "GENERAL PURPOSE OUTPUT [5]"
+  uo[6]: "GENERAL PURPOSE OUTPUT [6]"
+  uo[7]: "GENERAL PURPOSE OUTPUT [7]"
+
+  # Bidirectional pins
+  uio[0]: "CS"
+  uio[1]: "MOSI"
+  uio[2]: "MISO"
+  uio[3]: "SCK"
+  uio[4]: "GENERAL PURPOSE I/O [0]"
+  uio[5]: "GENERAL PURPOSE I/O [1]"
+  uio[6]: "GENERAL PURPOSE I/O [2]"
+  uio[7]: "GENERAL PURPOSE I/O [3]"
+
+# Do not change!
+yaml_version: 6
