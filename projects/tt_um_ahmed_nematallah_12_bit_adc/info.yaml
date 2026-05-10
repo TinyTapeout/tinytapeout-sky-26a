@@ -2,7 +2,7 @@
 project:
   title:        "12-bit ADC"      # Project title
   author:       "Ahmed Nematallah"      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  discord:      "Ahmed.Nematallah"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "12-bit ADC"      # One line description of what your project does
   language:     "Analog" # other examples include Verilog, Amaranth, VHDL, etc
   clock_hz:     30000000       # Clock frequency in Hz (or 0 if not applicable)
