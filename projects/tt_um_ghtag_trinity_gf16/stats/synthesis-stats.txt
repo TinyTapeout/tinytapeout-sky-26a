@@ -1,0 +1,21 @@
+110. Printing statistics.
+
+=== tt_um_ghtag_trinity_gf16 ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+       18        - wires
+       53        - wire bits
+        8        - public wires
+       43        - public wire bits
+        8        - ports
+       43        - port bits
+       34   427.91 cells
+       14    52.55   sky130_fd_sc_hd__conb_1
+       10  262.752   sky130_fd_sc_hd__dfrtp_2
+       10  112.608   sky130_fd_sc_hd__mux2_1
+
+   Chip area for module '\tt_um_ghtag_trinity_gf16': 427.910400
+     of which used for sequential elements: 262.752000 (61.40%)
+
