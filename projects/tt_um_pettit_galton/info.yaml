@@ -30,13 +30,13 @@ project:
 pinout:
   # Inputs
   ui[0]: "Hold Ball"
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
+  ui[1]: "Faster"
+  ui[2]: "Slower"
+  ui[3]: "Histogram"
   ui[4]: "PMOD LATCH"
   ui[5]: "PMOD CLOCK"
   ui[6]: "PMOD DATA"
-  ui[7]: ""
+  ui[7]: "Audio Toggle"
 
   # Outputs
   uo[0]: "R1"
