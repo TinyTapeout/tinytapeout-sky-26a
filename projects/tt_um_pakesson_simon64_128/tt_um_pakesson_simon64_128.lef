@@ -76,7 +76,6 @@ MACRO tt_um_pakesson_simon64_128
   PIN ui_in[0]
     DIRECTION INPUT ;
     USE SIGNAL ;
-    ANTENNAGATEAREA 0.213000 ;
     PORT
       LAYER met4 ;
         RECT 138.310 224.760 138.610 225.760 ;
@@ -85,7 +84,6 @@ MACRO tt_um_pakesson_simon64_128
   PIN ui_in[1]
     DIRECTION INPUT ;
     USE SIGNAL ;
-    ANTENNAGATEAREA 0.213000 ;
     PORT
       LAYER met4 ;
         RECT 135.550 224.760 135.850 225.760 ;
@@ -94,7 +92,6 @@ MACRO tt_um_pakesson_simon64_128
   PIN ui_in[2]
     DIRECTION INPUT ;
     USE SIGNAL ;
-    ANTENNAGATEAREA 0.213000 ;
     PORT
       LAYER met4 ;
         RECT 132.790 224.760 133.090 225.760 ;
@@ -143,6 +140,7 @@ MACRO tt_um_pakesson_simon64_128
   PIN uio_in[0]
     DIRECTION INPUT ;
     USE SIGNAL ;
+    ANTENNAGATEAREA 0.213000 ;
     PORT
       LAYER met4 ;
         RECT 116.230 224.760 116.530 225.760 ;
@@ -151,6 +149,7 @@ MACRO tt_um_pakesson_simon64_128
   PIN uio_in[1]
     DIRECTION INPUT ;
     USE SIGNAL ;
+    ANTENNAGATEAREA 0.213000 ;
     PORT
       LAYER met4 ;
         RECT 113.470 224.760 113.770 225.760 ;
@@ -159,6 +158,7 @@ MACRO tt_um_pakesson_simon64_128
   PIN uio_in[2]
     DIRECTION INPUT ;
     USE SIGNAL ;
+    ANTENNAGATEAREA 0.213000 ;
     PORT
       LAYER met4 ;
         RECT 110.710 224.760 111.010 225.760 ;
@@ -295,6 +295,7 @@ MACRO tt_um_pakesson_simon64_128
   PIN uio_out[3]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met4 ;
         RECT 63.790 224.760 64.090 225.760 ;
@@ -335,7 +336,6 @@ MACRO tt_um_pakesson_simon64_128
   PIN uo_out[0]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
-    ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met4 ;
         RECT 94.150 224.760 94.450 225.760 ;
@@ -344,7 +344,6 @@ MACRO tt_um_pakesson_simon64_128
   PIN uo_out[1]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
-    ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met4 ;
         RECT 91.390 224.760 91.690 225.760 ;
@@ -353,7 +352,6 @@ MACRO tt_um_pakesson_simon64_128
   PIN uo_out[2]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
-    ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met4 ;
         RECT 88.630 224.760 88.930 225.760 ;
@@ -378,6 +376,7 @@ MACRO tt_um_pakesson_simon64_128
   PIN uo_out[5]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met4 ;
         RECT 80.350 224.760 80.650 225.760 ;
@@ -386,6 +385,7 @@ MACRO tt_um_pakesson_simon64_128
   PIN uo_out[6]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.445500 ;
     PORT
       LAYER met4 ;
         RECT 77.590 224.760 77.890 225.760 ;
@@ -405,13 +405,13 @@ MACRO tt_um_pakesson_simon64_128
       LAYER li1 ;
         RECT 2.760 2.635 158.240 223.125 ;
       LAYER met1 ;
-        RECT 2.760 2.480 158.540 223.280 ;
+        RECT 2.760 2.480 158.240 223.280 ;
       LAYER met2 ;
-        RECT 3.320 2.535 158.610 224.925 ;
+        RECT 3.770 2.535 157.680 225.605 ;
       LAYER met3 ;
-        RECT 5.125 2.555 158.635 224.905 ;
+        RECT 3.745 2.555 156.795 225.585 ;
       LAYER met4 ;
-        RECT 7.655 224.360 30.270 224.905 ;
+        RECT 3.975 224.360 30.270 224.905 ;
         RECT 31.370 224.360 33.030 224.905 ;
         RECT 34.130 224.360 35.790 224.905 ;
         RECT 36.890 224.360 38.550 224.905 ;
@@ -453,18 +453,16 @@ MACRO tt_um_pakesson_simon64_128
         RECT 136.250 224.360 137.910 224.905 ;
         RECT 139.010 224.360 140.670 224.905 ;
         RECT 141.770 224.360 143.430 224.905 ;
-        RECT 144.530 224.360 146.190 224.905 ;
-        RECT 147.290 224.360 157.945 224.905 ;
-        RECT 7.655 223.680 157.945 224.360 ;
-        RECT 7.655 13.095 17.880 223.680 ;
-        RECT 20.280 13.095 21.180 223.680 ;
-        RECT 23.580 13.095 56.750 223.680 ;
-        RECT 59.150 13.095 60.050 223.680 ;
-        RECT 62.450 13.095 95.620 223.680 ;
-        RECT 98.020 13.095 98.920 223.680 ;
-        RECT 101.320 13.095 134.490 223.680 ;
-        RECT 136.890 13.095 137.790 223.680 ;
-        RECT 140.190 13.095 157.945 223.680 ;
+        RECT 3.975 223.680 144.145 224.360 ;
+        RECT 3.975 19.895 17.880 223.680 ;
+        RECT 20.280 19.895 21.180 223.680 ;
+        RECT 23.580 19.895 56.750 223.680 ;
+        RECT 59.150 19.895 60.050 223.680 ;
+        RECT 62.450 19.895 95.620 223.680 ;
+        RECT 98.020 19.895 98.920 223.680 ;
+        RECT 101.320 19.895 134.490 223.680 ;
+        RECT 136.890 19.895 137.790 223.680 ;
+        RECT 140.190 19.895 144.145 223.680 ;
   END
 END tt_um_pakesson_simon64_128
 END LIBRARY
