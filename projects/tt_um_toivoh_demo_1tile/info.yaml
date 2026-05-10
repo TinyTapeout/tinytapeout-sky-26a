@@ -18,11 +18,12 @@ project:
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "project_synth.v"
-    - "vga_skeleton.sv"
-    - "raster_scan.sv"
-    - "memories.sv"
-    - "synth_test.sv"
+
     - "music_player.sv"
+    - "memories.sv"
+    - "raster_scan.sv"
+    - "synth_test.sv"
+    - "vga_skeleton.sv"
     - "music_player_wrapper.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
