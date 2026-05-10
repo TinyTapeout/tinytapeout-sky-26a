@@ -3,7 +3,7 @@ project:
   title:        "analog circuit"      # Project title
   author:       "shimomi"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "TBD"      # One line description of what your project does
+  description:  "delta-sigma modulator with band-gap reference"      # One line description of what your project does
   language:     "Analog" # other examples include Verilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -25,7 +25,7 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: ""
+  ui[0]: "AIOSEL"
   ui[1]: ""
   ui[2]: ""
   ui[3]: ""
@@ -35,7 +35,7 @@ pinout:
   ui[7]: ""
 
   # Outputs
-  uo[0]: ""
+  uo[0]: "BITOUT"
   uo[1]: ""
   uo[2]: ""
   uo[3]: ""
