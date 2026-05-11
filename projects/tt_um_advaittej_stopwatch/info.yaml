@@ -1,0 +1,53 @@
+# Tiny Tapeout project information
+project:
+  title:        "V-SPACE Demo: Command & Control Chronograph"
+  author:       "Advaittej"
+  discord:      "" 
+  description:  "Interactive 1Hz stopwatch with hardware debouncing, lap memory, alarm target, and 9600-baud UART RX/TX telemetry."
+  language:     "Verilog" 
+  clock_hz:     10000000 
+
+  # How many tiles your design occupies?
+  tiles: "1x1" 
+
+  # Your top module name must start with "tt_um_". 
+  top_module:  "tt_um_advaittej_stopwatch"
+
+  # List your project's source files here.
+  source_files:
+    - "project.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+pinout:
+  # Inputs
+  ui[0]: "Start / Pause Button"
+  ui[1]: "Lap Button"
+  ui[2]: ""
+  ui[3]: ""
+  ui[4]: "Alarm Target Bit 0"
+  ui[5]: "Alarm Target Bit 1"
+  ui[6]: "Alarm Target Bit 2"
+  ui[7]: "Alarm Target Bit 3"
+
+  # Outputs
+  uo[0]: "Segment A"
+  uo[1]: "Segment B"
+  uo[2]: "Segment C"
+  uo[3]: "Segment D"
+  uo[4]: "Segment E"
+  uo[5]: "Segment F"
+  uo[6]: "Segment G"
+  uo[7]: "Alarm Match LED (Dec Point)"
+
+  # Bidirectional pins
+  uio[0]: "UART TX Telemetry (Output)"
+  uio[1]: "UART RX Commands (Input)"
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: "Lap Memory Bit 0 (Output)"
+  uio[5]: "Lap Memory Bit 1 (Output)"
+  uio[6]: "Lap Memory Bit 2 (Output)"
+  uio[7]: "Lap Memory Bit 3 (Output)"
+
+# Do not change!
+yaml_version: 6
