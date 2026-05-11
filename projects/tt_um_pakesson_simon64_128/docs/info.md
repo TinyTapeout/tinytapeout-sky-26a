@@ -80,6 +80,9 @@ Notes:
 
 ## How It Works
 
+This section covers parts of the SIMON cipher together with notes on the implementation in this project, but a lot of details are left out.
+For full details on the inner workings of SIMON, see the References section further down.
+
 ### Overview
 SIMON supports multiple variants and parameter sets based on word size (n), which determines the overall block size (2n). The key size is `m*n` bits, where `m` is 2, 3, or 4.
 
@@ -93,9 +96,6 @@ The project consists of three main Verilog modules: an SPI peripheral that handl
 The full key and block are loaded as bytes over SPI and stored in a 128-bit key window register `k_window` and 64-bit block state (split into `x_reg` and `y_reg`). Round processing is then performed iteratively, bit-by-bit over multiple cycles, to reduce area.
 
 ### Implementation Details
-This section covers parts of the SIMON cipher together with notes on the implementation in this project.
-For full details on the inner workings of SIMON, see the References section further down.
-
 The round function is as follows:
 ```
 R(x, y) = (y ^ F(x) ^ k_i, x)
@@ -109,7 +109,7 @@ The inverse round function is used for decryption:
 ```
 R_inv(x, y) = (y, x ^ F(y) ^ k_i)
 ```
-In the code, there is a shared datapath for encryption/decryption, selected by the `op_decrypt` control bit and key-schedule direction/state.
+The code has a shared datapath for encryption/decryption, selected by the `op_decrypt` control bit and key-schedule direction/state.
 
 Round keys are generated from the 128-bit key window. The key-schedule constant is `c = 0xFFFF_FFFC` (`2^32-4` for n=32), and the schedule combines c, one z-sequence bit, and rotated/XOR-mixed key words to form the next key word.
 
@@ -123,8 +123,30 @@ In the code, the key window is
 ```
 k_window = {kw3, kw2, kw1, kw0}
 ```
+and `kw0` is always the active round-key word used one bit at a time as `rk_bit = kw0[ctr_bit]`.
+
+The key words are updated in place, so the core does not need to store all 44 round keys.
+Instead, it advances one key-schedule step for each round.
+Forwards (for encryption):
+```
+ks_word = C ^ z_bit ^ kw0 ^ ROR(kw3,3) ^ kw1 ^ ROR(ROR(kw3,3) ^ kw1,1)
+k_window <= {ks_word, kw3, kw2, kw1}
+```
+After this, the next round uses the new `kw0` (which is the previous `kw1`).
+
+Backwards (for decryption):
+```
+ks_word = C ^ z_bit_inv ^ kw3 ^ ROR(kw2,3) ^ kw0 ^ ROR(ROR(kw2,3) ^ kw0,1)
+k_window <= {kw2, kw1, kw0, ks_word}
+```
+This computes the previous round key and shifts it into `kw0`.
 
 The 62-bit z-sequence (z3 for SIMON64/128) is generated using an LFSR with a 7-bit state (with `P(x) = x^7 + x^4 + x + 1`), which supports updating both backwards and forwards so that the key schedule can run in either direction.
+
+Defining `z_t = z_lfsr[0]` at time `t`, the implementation is
+```
+z_{t+7} = z_{t+4} ^ z_{t+1} ^ z_t
+```
 Forward updates are
 ```
 z_lfsr_fwd = {z_lfsr[4] ^ z_lfsr[1] ^ z_lfsr[0], z_lfsr[6:1]}
@@ -133,12 +155,15 @@ and backward updates
 ```
 z_lfsr_bwd = {z_lfsr[5:0], z_lfsr[6] ^ z_lfsr[3] ^ z_lfsr[0]}
 ```
+The forward and backward output bits are `z_bit = z_lfsr[0]` and `z_bit_inv = z_lfsr[6] ^ z_lfsr[3] ^ z_lfsr[0]` respectively.
 
 Internally, each round is executed over 32 clock cycles (`ctr_bit` from 0 to 31). At each bit step, the core computes one new bit from the SIMON round function and the current round-key bit `rk_bit = kw0[ctr_bit]`.
 
 A warmup phase is used to (re-)align the key schedule direction and state between encryption and decryption operations.
 
 Both encryption and decryption take 1410 clock cycles to complete without warmup, or 1453 clock cycles with warmup.
+
+When an encryption or decryption operation has finished, the `out_valid` bit is set to 1.
 
 The cryptographic implementation matches the behavior of the [simonspeckciphers](https://pypi.org/project/simonspeckciphers/) Python library, which is also verified as part of the automated tests.
 
@@ -284,8 +309,7 @@ Plaintext: 656b696c20646e75
 
 Use a specific FTDI device like this:
 ```sh
-$ uv run pyftdi_example.py --decrypt --device ftdi://ftdi:2232:TG11163f/2 --key 1b1a1918131211100b0a090803
-020100 --data 44c8fc20b9dfa07a
+$ uv run pyftdi_example.py --decrypt --device ftdi://ftdi:2232:TG11163f/2 --key 1b1a1918131211100b0a090803020100 --data 44c8fc20b9dfa07a
 Plaintext: 656b696c20646e75
 ```
 
