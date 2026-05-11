@@ -20,12 +20,13 @@ project:
     - "project.v"
     - "hvsync_generator.v"
     - "gamepad_pmod.v"
-    - "center_star_vga_manager.v"
-    - "simple_ship_movement_manager.v"
-    - "simple_ship_vga_manager.v"
-    - "simple_ship_wrapper.v"
-    - "vga_distance_from_center.v"
-    - "vga_offset_manager.v"
+    - "center_star_vga_manager.sv"
+    - "simple_ship_movement_manager.sv"
+    - "simple_ship_vga_manager.sv"
+    - "simple_ship_wrapper.sv"
+    - "spacewar_noise_generator.v"
+    - "vga_distance_from_center.sv"
+    - "vga_offset_manager.sv"
 
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
