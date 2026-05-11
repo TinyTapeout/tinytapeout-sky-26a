@@ -1,0 +1,58 @@
+# Tiny Tapeout project information
+project:
+  title:        "Signal_Detection_Processor"
+  author:       "Sam Ranjith"
+  discord:      "" 
+  description:  "Ground Penetrating Radar digital processor using FIR filtering and peak detection"
+  language:     "Verilog"
+  clock_hz:     50000000
+
+  # Tile size
+  tiles: "1x1"
+
+  # Top module name
+  top_module:  "tt_um_signal_detector"
+
+  # Source files
+  source_files:
+    - "tt_um_signal_detector.v"
+    - "fir_filter.v"
+    - "envelope_detector.v"
+    - "peak_detector.v"
+    - "depth_estimator.v"
+    
+
+# Pinout description
+pinout:
+  # Inputs
+  ui[0]: "Radar sample bit0"
+  ui[1]: "Radar sample bit1"
+  ui[2]: "Radar sample bit2"
+  ui[3]: "Radar sample bit3"
+  ui[4]: "Radar sample bit4"
+  ui[5]: "Radar sample bit5"
+  ui[6]: "Radar sample bit6"
+  ui[7]: "Radar sample bit7"
+
+  # Outputs
+  uo[0]: "Object detected flag"
+  uo[1]: "Processed radar signal bit1"
+  uo[2]: "Processed radar signal bit2"
+  uo[3]: "Processed radar signal bit3"
+  uo[4]: "Processed radar signal bit4"
+  uo[5]: "Processed radar signal bit5"
+  uo[6]: "Processed radar signal bit6"
+  uo[7]: "Processed radar signal bit7"
+
+  # Bidirectional pins
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+# Do not change
+yaml_version: 6
