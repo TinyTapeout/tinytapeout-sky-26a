@@ -1,41 +1,40 @@
 # Tiny Tapeout project information (Wokwi project)
 project:
-  wokwi_id:     459285910800527361       # Set this to the ID of your Wokwi project (the number from the project's URL)
-  title:        "4-Bit Counter and Registers Demo"      # Project title
-  author:       "Thomas Fischbacher"      # Your name
+  wokwi_id:     463706339714973697       # Set this to the ID of your Wokwi project (the number from the project's URL)
+  title:        "Demo 4-bit ALU 74181 variant"      # Project title
+  author:       "Thomas Fischbacher (with Swiss Students)"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "Educational Wokwi Demo"      # One line description of what your project does
+  description:  "Wokwi Demo: 74181"      # One line description of what your project does
   language:     "Wokwi" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     10000000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
-
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: "OP0"
-  ui[1]: "OP1"
-  ui[2]: "OP2"
-  ui[3]: "DI0"
-  ui[4]: "DI1"
-  ui[5]: "DI2"
-  ui[6]: "DI3"
-  ui[7]: "SEL0"
+  ui[0]: "d0"
+  ui[1]: "d1"
+  ui[2]: "d2"
+  ui[3]: "d3"
+  ui[4]: "q0"
+  ui[5]: "q1"
+  ui[6]: "q2"
+  ui[7]: "unused"
 
   # Outputs
-  uo[0]: "C0"
-  uo[1]: "C1"
-  uo[2]: "C2"
-  uo[3]: "C3"
-  uo[4]: "DO0"
-  uo[5]: "DO1"
-  uo[6]: "DO2"
-  uo[7]: "DO3"
+  uo[0]: "F0"
+  uo[1]: "F1"
+  uo[2]: "F2"
+  uo[3]: "F3"
+  uo[4]: "A=B"
+  uo[5]: "P"
+  uo[6]: "C(n+4)"
+  uo[7]: "G"
 
-  # Bidirectional pins (we do not have any in this design)
+  # Bidirectional pins
   uio[0]: ""
   uio[1]: ""
   uio[2]: ""
