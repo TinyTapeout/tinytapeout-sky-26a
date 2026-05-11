@@ -1,0 +1,63 @@
+# Tiny Tapeout project information
+project:
+  title:        "EP Sensor v7 (symmetric in-place thicken, Zhao-compliant)"
+  author:       "Thomas Gilbert"
+  discord:      ""
+  description:  "v7 = v2 baseline + PGS strip + symmetric DELTA=0.8 in-place spiral thicken with cap_mim keepout. Both spirals widened equally (11.6um vertical / 6.6um horizontal), preserving Zhao chiral EP symmetry. Q ~5.7 at 3 GHz, predicted to resolve cv-bits b4-b6."
+  language:     "Analog"
+  clock_hz:     0
+
+  # 2x2 analog tile (334 x 225 µm)
+  tiles: "2x2"
+
+  # ua[0] = V1 tank node (drive + observe).  ua[1] = V2 tank node (output peak).
+  analog_pins: 2
+  uses_3v3: false
+
+  top_module:  "tt_um_thomas_ep_sensor"
+
+  source_files:
+    - "project.v"
+
+# Pinout
+pinout:
+  # Inputs - cv-array perturbation switch controls (b0..b7)
+  ui[0]: "b0 (cv-array LSB; 20 fF, eps=0.0055)"
+  ui[1]: "b1 (40 fF, eps=0.011)"
+  ui[2]: "b2 (80 fF, eps=0.022; lowest resolved point)"
+  ui[3]: "b3 (160 fF, eps=0.044; Zhao window lower edge)"
+  ui[4]: "b4 (320 fF, eps=0.088; within Zhao window)"
+  ui[5]: "b5 (640 fF, eps=0.176; within Zhao window)"
+  ui[6]: "b6 (1280 fF, eps=0.352; above Zhao window)"
+  ui[7]: "b7 (cv-array MSB; 1280 fF)"
+
+  # Outputs (unused, tied low)
+  uo[0]: ""
+  uo[1]: ""
+  uo[2]: ""
+  uo[3]: ""
+  uo[4]: ""
+  uo[5]: ""
+  uo[6]: ""
+  uo[7]: ""
+
+  # Bidirectional (unused)
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+  # Analog pins
+  ua[0]: "V1 (V1 LC tank; RF probe drive and observe at 50 ohm)"
+  ua[1]: "V2 (V2 LC tank; observe peak split)"
+  ua[2]: ""
+  ua[3]: ""
+  ua[4]: ""
+  ua[5]: ""
+
+# Do not change!
+yaml_version: 6
