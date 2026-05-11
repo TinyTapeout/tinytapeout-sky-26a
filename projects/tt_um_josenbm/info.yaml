@@ -1,0 +1,58 @@
+# Tiny Tapeout project information
+project:
+  title:        "9-Channel Frequency Counter with I2C + SPI DAC & ADC"
+  author:       "Jose Bahamonde"
+  discord:      ""   # optional
+  description:  "Programmable 9-channel frequency counter with I2C control, SPI DAC output, and SPI ADC sampling."
+  language:     "Verilog"
+  clock_hz:     50000000
+
+  # Start with 1x1. CI will fail if it doesn't fit.
+  tiles: "8x2"  # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+  # Must match your wrapper module name exactly
+  top_module:  "tt_um_josenbm"
+
+  # List ALL source files in ./src
+  source_files:
+    - "tt_um_josenbm.v"
+    - "asic_top.v"
+    - "i2c_slave.v"
+    - "freq_counter_gate.v"
+    - "spi_dac.v"
+    - "spi_adc.v"
+
+# The pinout of your project.
+pinout:
+  # Inputs
+  ui[0]: "I2C_SCL"
+  ui[1]: "SPI_DAC_MISO"
+  ui[2]: "SPI_ADC_MISO"
+  ui[3]: "OSC0_IN"
+  ui[4]: "OSC1_IN"
+  ui[5]: "OSC2_IN"
+  ui[6]: "OSC3_IN"
+  ui[7]: "OSC4_IN"
+
+  # Outputs
+  uo[0]: "SPI_DAC_SCLK"
+  uo[1]: "SPI_DAC_MOSI"
+  uo[2]: "SPI_DAC_CS_N"
+  uo[3]: "SPI_ADC_SCLK"
+  uo[4]: "SPI_ADC_CS_N"
+  uo[5]: ""
+  uo[6]: ""
+  uo[7]: ""
+
+  # Bidirectional pins
+  uio[0]: "I2C_SDA (open-drain)"
+  uio[1]: "OSC5_IN"
+  uio[2]: "OSC6_IN"
+  uio[3]: "OSC7_IN"
+  uio[4]: "OSC8_IN"
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+# Do not change!
+yaml_version: 6
