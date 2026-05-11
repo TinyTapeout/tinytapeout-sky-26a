@@ -1,9 +1,9 @@
 # Tiny Tapeout project information
 project:
-  title:        "Sanity Bouncing Box"
+  title:        "Katomata - 1D Cellular Automata"
   author:       "kavsdev"
   discord:      "kavsdev"
-  description:  "VGA demoscene entry: a square that bounces around the screen."
+  description:  "VGA demoscene entry: 1D elementary cellular automata cycling through all 256 Wolfram rules."
   language:     "Verilog"
   clock_hz:     25175000   # 25.175 MHz VGA pixel clock
 
@@ -11,7 +11,7 @@ project:
   tiles: "1x1"
 
   # Top module must start with "tt_um_".
-  top_module:  "tt_um_sanity_bouncing_box"
+  top_module:  "tt_um_katomata"
 
   # List your project's source files here.
   # Source files must be in ./src and you must list each source file separately, one per line.
