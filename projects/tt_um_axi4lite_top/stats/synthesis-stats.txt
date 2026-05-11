@@ -1,0 +1,41 @@
+147. Printing statistics.
+
+=== tt_um_axi4lite_top ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+      232        - wires
+      267        - wire bits
+       81        - public wires
+      116        - public wire bits
+        8        - ports
+       43        - port bits
+      248  3388.25 cells
+        8   90.086   sky130_fd_sc_hd__a221o_2
+       13  130.125   sky130_fd_sc_hd__a22o_2
+        2   17.517   sky130_fd_sc_hd__a31o_2
+        1   11.261   sky130_fd_sc_hd__a32o_2
+        1   16.266   sky130_fd_sc_hd__a41oi_2
+       25   187.68   sky130_fd_sc_hd__and2_2
+        1    7.507   sky130_fd_sc_hd__and3_2
+        1    10.01   sky130_fd_sc_hd__and3b_2
+        1    5.005   sky130_fd_sc_hd__buf_2
+       15   56.304   sky130_fd_sc_hd__conb_1
+       32  840.806   sky130_fd_sc_hd__dfrtp_2
+        1   26.275   sky130_fd_sc_hd__dfstp_2
+       48 1.02E+03   sky130_fd_sc_hd__dfxtp_2
+       10   37.536   sky130_fd_sc_hd__inv_2
+       55  619.344   sky130_fd_sc_hd__mux2_1
+        2   12.512   sky130_fd_sc_hd__nand2_2
+        9   78.826   sky130_fd_sc_hd__nand2b_2
+        1    10.01   sky130_fd_sc_hd__nand3_2
+        2   12.512   sky130_fd_sc_hd__nor2_2
+        1    10.01   sky130_fd_sc_hd__nor3_2
+        9   90.086   sky130_fd_sc_hd__o211a_2
+        8   80.077   sky130_fd_sc_hd__o21ba_2
+        2   17.517   sky130_fd_sc_hd__or3b_2
+
+   Chip area for module '\tt_um_axi4lite_top': 3388.249600
+     of which used for sequential elements: 1888.060800 (55.72%)
+
