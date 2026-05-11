@@ -18,39 +18,25 @@ project:
   # Source files must be in ./src and you must list each source file separately, one per line.
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
-#    - "project.v"
-#    - "alt_project.v"
-#    - "subdivider_pl.sv"
-#    - "subdiv_test.sv"
-    - "trace_state.sv"
-    - "subdet.sv"
-#    - "subdiv_tracer.sv"
-#    - "interval_buffer.sv"
-    - "interval_buffer2.sv"
-#    - "buffered_tracer.sv"
-    - "raster_scan.sv"
-#    - "vga_tracer.sv"
-#    - "multiplier.sv"
-#    - "view_calc.sv"
     - "jumper.sv"
-
-    - "subdivider_pl.sv"
-    - "subdiv_pl_tracer.sv"
-    - "buffered_pl_tracer.sv"
-    - "vga_pl_tracer.sv"
-#    - "scene.sv"
     - "scene1.sv"
     - "trace_state_rs.sv"
-    - "matrix_calc_pl.sv"
-    - "view_calc_pl.sv"
-    - "room_navigator.sv"
-
-    - "project_pl.v"
+    - "subdivider_pl.sv"
     - "memories.sv"
-
-    - "synth_test.sv"
-    - "music_player.sv"
+    - "subdiv_pl_tracer.sv"
+    - "raster_scan.sv"
+    - "view_calc_pl.sv"
     - "music_player_wrapper.sv"
+    - "interval_buffer2.sv"
+    - "trace_state.sv"
+    - "subdet.sv"
+    - "synth_test.sv"
+    - "matrix_calc_pl.sv"
+    - "vga_pl_tracer.sv"
+    - "project_pl.v"
+    - "music_player.sv"
+    - "buffered_pl_tracer.sv"
+    - "room_navigator.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
