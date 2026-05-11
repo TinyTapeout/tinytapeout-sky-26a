@@ -1,6 +1,6 @@
 # Tiny Tapeout project information
 project:
-  title:        "Wildcamping"      # Project title
+  title:        "PicoMIPS CPU"      # Project title
   author:       "Byron Theobald"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Initial Tests and Basic MIPS CPU" # One line description of what your project does
@@ -27,7 +27,10 @@ project:
     - "ovf.sv"
     - "pc.sv"
     - "rf.sv"
-    - "rom.sv"
+#    - "ram.sv"
+#    - "rom.sv"
+#    - "serial.sv"
+    - "shiftreg.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
