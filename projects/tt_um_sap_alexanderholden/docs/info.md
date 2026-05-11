@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Enable two inputs to turn an LED on
+SAP-1 CPU
 
 ## How to test
 
-Attach two  buttons and click
+SAP-1 CPU
 
 ## External hardware
 
-Two buttons and an led
+List external hardware used in your project (e.g. PMOD, LED display, etc), if any
