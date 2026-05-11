@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## Overview
 
-`chip-w26` is a very simple 8-bit processor that also (technically) outputs to VGA. It has four internal general-purpose 8-bit registers and a custom ISA with eight 16-bit instructions. `chip-w26` has support for up to 1024 16-bit instructions in flash memory and 256 bytes of RAM for data.
+`chip-w26` is a very simple 8-bit processor that also (technically) outputs to VGA. It has seven internal general-purpose 8-bit registers with one also used for VGA output and a custom ISA with eight 16-bit instructions. `chip-w26` has support for up to 1024 16-bit instructions in flash memory and 256 bytes of RAM for data.
 
 Due to constraints with using SPI for memory, `chip-w26` executes a non-store/load instruction in roughly 100 clock cycles and a store/load instruction in roughly 200 clock cycles. **This will almost certainly interfere with intricate VGA work**, as this means between every instruction, the beam will have traced at least another 100 pixels. See more information below.
 
@@ -47,9 +47,22 @@ The first instruction fetched will always be at address 0 in flash memory.
 
 RAM accesses, through **LOAD** and **STORE** can address up to a value stored in one of the registers. In other words, only addresses representable in 8 bits are available. This means there are 256 bytes of read/write RAM available.
 
-### VGA
+### Register Mappings
 
-??
+```
+reg | desc
+----------
+r0  | R , always zero
+r1  | RW, general-purpose
+r2  | RW, general-purpose
+r3  | RW, general-purpose
+r4  | RW, general-purpose
+r5  | RW, general-purpose
+r6  | RW, general-purpose
+r7  | RW, r7[5:0] is attached to {r[1:0], g[1:0], b[1:0]},
+    |     with an automatic check to see if is in
+    |     display range to not hurt the VGA screen
+```
 
 ## How to test
 
