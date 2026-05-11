@@ -1,0 +1,83 @@
+# Tiny Tapeout project information
+project:
+  title:        "UWASIC Crypto"      # Project title
+  author:       "Leo Qi"      # Your name
+  discord:      "leozqi"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "crypto accelerator"      # One line description of what your project does
+  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "4x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  # just to see how many cells we need
+  
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_uwasic_crypto"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "project.v"
+    - "ack_bus_arbiter.v"
+    - "ack_bus_module_interface.v"
+    - "aes_fsm.v"
+    - "bus_arbiter.v"
+    - "comp_queue.v"
+    - "control_top.v"
+    - "data_bus_ctrl.v"
+    - "data_bus_module_interface.v"
+    - "deserializer.v"
+    - "global_arbiter.v"
+    - "interconnect.v"
+    - "mem_command_port.v"
+    - "mem_spi_controller.v"
+    - "mem_top.v"
+    - "mem_txn_fsm.v"
+    - "req_queue.v"
+    - "scoreboard.v"
+    - "serializer.v"
+    - "sha_fsm.v"
+    - "mix_columns.v"
+    - "aes_core_rs.v"
+    - "AES.v"
+    - "roundkey_gen.v"
+    - "sbox.v"
+    - "sub_bytes.v"
+    - "sha_top.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "sclk"
+  ui[1]: "n_cs"
+  ui[2]: "mosi"
+  ui[3]: ""
+  ui[4]: ""
+  ui[5]: ""
+  ui[6]: ""
+  ui[7]: ""
+
+  # Outputs
+  uo[0]: "miso"
+  uo[1]: "sclk_mem"
+  uo[2]: "n_cs_mem"
+  uo[3]: ""
+  uo[4]: ""
+  uo[5]: ""
+  uo[6]: ""
+  uo[7]: ""
+
+  # Bidirectional pins
+  uio[0]: "mem_qspi_in_0"
+  uio[1]: "mem_qspi_in_1"
+  uio[2]: "mem_qspi_in_2"
+  uio[3]: "mem_qspi_in_3"
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+# Do not change!
+yaml_version: 6
