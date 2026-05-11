@@ -418,7 +418,7 @@ MACRO tt_um_shimomi_analog
   PIN VDPWR
     DIRECTION INOUT ;
     USE POWER ;
-    ANTENNADIFFAREA 18.497000 ;
+    ANTENNADIFFAREA 100.878998 ;
     PORT
       LAYER met4 ;
         RECT 142.500 5.500 144.500 221.260 ;
@@ -444,15 +444,15 @@ MACRO tt_um_shimomi_analog
   END VAPWR
   OBS
       LAYER nwell ;
-        RECT 9.000 6.000 121.900 213.500 ;
+        RECT 9.000 6.000 143.905 213.500 ;
       LAYER li1 ;
-        RECT 9.390 6.130 120.600 213.260 ;
+        RECT 9.390 6.130 143.705 213.260 ;
       LAYER met1 ;
-        RECT 3.000 3.000 137.050 223.500 ;
+        RECT 3.000 3.000 144.340 223.500 ;
       LAYER met2 ;
-        RECT 0.100 2.950 137.000 223.550 ;
+        RECT 0.100 2.950 144.245 225.020 ;
       LAYER met3 ;
-        RECT 0.030 0.200 144.550 223.525 ;
+        RECT 0.030 0.200 144.550 224.995 ;
       LAYER met4 ;
         RECT 0.075 224.360 14.630 225.500 ;
         RECT 15.730 224.360 17.390 225.500 ;
