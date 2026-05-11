@@ -1,0 +1,57 @@
+# Tiny Tapeout project information
+project:
+  title:        "Nibble - 4-bit CPU"
+  author:       "Jacob Kebaso"    
+  discord:      ""
+  description:  "A minimalistic 4-bit accumulator CPU with 16 instructions and external program memory."
+  language:     "Verilog"
+  clock_hz:     1000000
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_jacob_kebaso_4bit_cpu"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "project.v"
+    - "cpu_core.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "instruction bit 0"
+  ui[1]: "instruction bit 1"
+  ui[2]: "instruction bit 2"
+  ui[3]: "instruction bit 3"
+  ui[4]: "instruction bit 4 (opcode LSB)"
+  ui[5]: "instruction bit 5"
+  ui[6]: "instruction bit 6"
+  ui[7]: "instruction bit 7 (opcode MSB)"
+
+  # Outputs
+  uo[0]: "accumulator bit 0"
+  uo[1]: "accumulator bit 1"
+  uo[2]: "accumulator bit 2"
+  uo[3]: "accumulator bit 3"
+  uo[4]: "carry flag"
+  uo[5]: "zero flag"
+  uo[6]: "halted"
+  uo[7]: "phase (0 = fetch, 1 = execute)"
+
+  # Bidirectional pins
+  uio[0]: "program counter bit 0 (output)"
+  uio[1]: "program counter bit 1 (output)"
+  uio[2]: "program counter bit 2 (output)"
+  uio[3]: "program counter bit 3 (output)"
+  uio[4]: "input port bit 0 (input)"
+  uio[5]: "input port bit 1 (input)"
+  uio[6]: "input port bit 2 (input)"
+  uio[7]: "input port bit 3 (input)"
+
+# Do not change!
+yaml_version: 6
