@@ -1,0 +1,49 @@
+# Tiny Tapeout project information (Wokwi project)
+project:
+  wokwi_id:     463711763041599489       # Set this to the ID of your Wokwi project (the number from the project's URL)
+  title:        "IEEE Open Silicon 2026: UTB UART Transmitter basic"      # Project title
+  author:       "George Archbold and Semillero SIMIC UTB"      # Your name
+  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "An 8-bit serial transmitter that converts parallel ASCII data (supporting characters from 0x40 to 0x5F) into a standard UART frame using a shift register architecture"      # One line description of what your project does
+  language:     "Wokwi" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: ""
+  ui[1]: "bit0"
+  ui[2]: "bit1"
+  ui[3]: "bit2"
+  ui[4]: "bit3"
+  ui[5]: "bit4"
+  ui[6]: "loadTX"
+  ui[7]: "out_en"
+
+  # Outputs
+  uo[0]: "tx_check"
+  uo[1]: ""
+  uo[2]: ""
+  uo[3]: ""
+  uo[4]: ""
+  uo[5]: "out_enable"
+  uo[6]: ""
+  uo[7]: "TX"
+
+  # Bidirectional pins
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+# Do not change!
+yaml_version: 6
