@@ -1,0 +1,55 @@
+140. Printing statistics.
+
+=== tt_um_sap_alexanderholden ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+      214        - wires
+      249        - wire bits
+       43        - public wires
+       78        - public wire bits
+        8        - ports
+       43        - port bits
+      230  2825.21 cells
+        1   15.014   sky130_fd_sc_hd__a2111oi_2
+        3   30.029   sky130_fd_sc_hd__a211o_2
+        1   11.261   sky130_fd_sc_hd__a21boi_2
+       14  122.618   sky130_fd_sc_hd__a21o_2
+        3   26.275   sky130_fd_sc_hd__a21oi_2
+        4   45.043   sky130_fd_sc_hd__a221o_2
+        4   40.038   sky130_fd_sc_hd__a22o_2
+        3   33.782   sky130_fd_sc_hd__a311o_2
+        1   15.014   sky130_fd_sc_hd__a311oi_2
+        5   43.792   sky130_fd_sc_hd__a31o_2
+        1   12.512   sky130_fd_sc_hd__a31oi_2
+        5   37.536   sky130_fd_sc_hd__and2_2
+        1    8.758   sky130_fd_sc_hd__and2b_2
+        3   22.522   sky130_fd_sc_hd__and3_2
+        3   30.029   sky130_fd_sc_hd__and3b_2
+        1   12.512   sky130_fd_sc_hd__and4bb_2
+       16   60.058   sky130_fd_sc_hd__conb_1
+       43 1.13E+03   sky130_fd_sc_hd__dfrtp_2
+       11    41.29   sky130_fd_sc_hd__inv_2
+       29  326.563   sky130_fd_sc_hd__mux2_1
+       14   87.584   sky130_fd_sc_hd__nand2_2
+        4   35.034   sky130_fd_sc_hd__nand2b_2
+       12   75.072   sky130_fd_sc_hd__nor2_2
+        1    10.01   sky130_fd_sc_hd__nor3_2
+        2   25.024   sky130_fd_sc_hd__nor3b_2
+        1   15.014   sky130_fd_sc_hd__nor4b_2
+        1   12.512   sky130_fd_sc_hd__o211ai_2
+        8   70.067   sky130_fd_sc_hd__o21a_2
+        1   11.261   sky130_fd_sc_hd__o221a_2
+        1   11.261   sky130_fd_sc_hd__o2bb2a_2
+        1   12.512   sky130_fd_sc_hd__o31ai_2
+        7   43.792   sky130_fd_sc_hd__or2_2
+        2   15.014   sky130_fd_sc_hd__or3_2
+        4   35.034   sky130_fd_sc_hd__or3b_2
+        1    8.758   sky130_fd_sc_hd__or4_2
+       10  162.656   sky130_fd_sc_hd__xnor2_2
+        8  130.125   sky130_fd_sc_hd__xor2_2
+
+   Chip area for module '\tt_um_sap_alexanderholden': 2825.209600
+     of which used for sequential elements: 1129.833600 (39.99%)
+
