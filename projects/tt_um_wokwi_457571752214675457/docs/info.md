@@ -8,20 +8,20 @@ You can also include images in this folder and reference them in the markdown. E
 -->
 
 ## How it works
+It is an ALU with AND, OR, XOR and ADD operations. It takes in two 3-bit operands as well as a 2-bit OPCODE and outputs a 3-bit output as well as carry and negative flags.
 
-Logic Gates are connected to inputs 0..7
-
-When a certain code is inputted the display shows an initial
+All operations are done simultaneously for each input. A multiplexer is then used to select which operation to forward to the output.
 
 ## How to test
 
-|  input 1,2,3,4,5,6,7,8  |  output a, b, c, d, e, f, g, dp  |
-|-------------------------|----------------------------------|
-|  X X X X X X X X        |  0 0 0 0 0 0 0 0                 |
-|  0 1 1 1 0 1 1 0        |  1 1 0 1 1 0 1 0                 |
+|  input 7, 6, 5, 4, 3, 2, 1, 0  |  output 4, 3, 2, 1, 0  |
+|          B[7:5] A[4:2] OPC[1:0]|         Z  C    Y[2:0] |
+|--------------------------------|------------------------|
+|        0  0  0  0  0  0  0  0  |         1  0  0  0  0  |
+|        0  0  1  0  1  0  0  1  |         0  0  0  1  1  |
 
 
 ## External hardware
 
-I use a 7-segmented display and an 8-input DIP switch.
+I used an 8-input DIP switch to simulate the inputs and LEDs to show the outputs.
 

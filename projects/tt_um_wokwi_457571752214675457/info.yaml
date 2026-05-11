@@ -1,10 +1,10 @@
 # Tiny Tapeout project information (Wokwi project)
 project:
   wokwi_id:     457571752214675457       # Set this to the ID of your Wokwi project (the number from the project's URL)
-  title:        "first_name"      # Project title
+  title:        "3bit_ALU"      # Project title
   author:       "Zaid"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "Outputs Initial when certain pin is inputted"      # One line description of what your project does
+  description:  "ALU which does AND, OR, XOR and ADD operations to 3 bit inputs"      # One line description of what your project does
   language:     "Wokwi" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -16,24 +16,24 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: "DIP_1"
-  ui[1]: "DIP_2"
-  ui[2]: "DIP_3"
-  ui[3]: "DIP_4"
-  ui[4]: "DIP_5"
-  ui[5]: "DIP_6"
-  ui[6]: "DIP_7"
-  ui[7]: "DIP_8"
+  ui[0]: "OPC_0"
+  ui[1]: "OPC_1"
+  ui[2]: "A_0"
+  ui[3]: "A_1"
+  ui[4]: "A_2"
+  ui[5]: "B_0"
+  ui[6]: "B_1"
+  ui[7]: "B_2"
 
   # Outputs
-  uo[0]: "LED_A"
-  uo[1]: "LED_B"
-  uo[2]: "LED_C"
-  uo[3]: "LED_D"
-  uo[4]: "LED_E"
-  uo[5]: "LED_F"
-  uo[6]: "LED_G"
-  uo[7]: "LED_DP"
+  uo[0]: "Y_0"
+  uo[1]: "Y_1"
+  uo[2]: "Y_2"
+  uo[3]: "FlagC"
+  uo[4]: "FlagZ"
+  uo[5]: ""
+  uo[6]: ""
+  uo[7]: ""
 
   # Bidirectional pins
   uio[0]: ""
