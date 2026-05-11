@@ -5,7 +5,7 @@ project:
   discord:      "Ahmed.Nematallah"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "12-bit ADC"      # One line description of what your project does
   language:     "Analog" # other examples include Verilog, Amaranth, VHDL, etc
-  clock_hz:     30000000       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     60000000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "2x2"          # Valid values for analog projects: 1x2, 2x2
@@ -56,9 +56,9 @@ pinout:
 
   # Analog pins - make sure to also set "analog_pins" above, else the pins won't be connected
   ua[0]: "AIN"
-  ua[1]: "AOUT"
-  ua[2]: "testp"
-  ua[3]: "testn"
+  ua[1]: "Fint_div_4"
+  ua[2]: "VCO_in"
+  ua[3]: "AIN"
   ua[4]: "nc"
   ua[5]: "nc"
 
