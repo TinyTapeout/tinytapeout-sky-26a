@@ -1,7 +1,7 @@
 # Tiny Tapeout project information (Wokwi project)
 project:
   wokwi_id:     463698873100105729       # Set this to the ID of your Wokwi project (the number from the project's URL)
-  title:        "Logic Trivia Challenge: 8-bit Digital Lock"      # Project title
+  title:        "IEEE Open Silicon 2026: UTB Logic Trivia Challenge: 8-bit Digital Lock"      # Project title
   author:       "George Archbold, Junior Sarmiento, Daniela Gonzalez, Miguel Baranoa, Jorge Mercado, Samuel Meza"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "8-bit Pattern Comparator that functions as a digital lock"      # One line description of what your project does
