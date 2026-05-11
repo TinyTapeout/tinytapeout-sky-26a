@@ -1,0 +1,54 @@
+# Tiny Tapeout project information
+project:
+  title:        "Melody Generator based on Markov Chains"
+  author:       "Arellano Nordahl Jose Luis"
+  discord:      "Wucho_N"
+  description:  "A stochastic music generator using two Markov Chains for note selection and duration on a Pentatonic Scale. Features a 16-bit LFSR entropy source, adjustable BPM, and selectable probability matrices."
+  how_it_works: "The design uses a 16-bit LFSR to generate pseudorandom numbers. These numbers drive two Markov Chain FSMs: one for musical notes (Do, Re, Mi, Sol, La, Mute) and one for rhythmic duration. A PWM generator converts the resulting frequencies into an audio signal. Users can influence the melody via a 4-bit seed and choose between 60/120 BPM and two different rhythm bias matrices."
+  how_to_test:  "Connect a speaker or buzzer to uo[0]. Set the seed using ui[3:0], select BPM with ui[4] and duration bias with ui[5]. Toggle reset to start a new procedural melody."
+  language:     "Verilog"
+  clock_hz:     1000000
+
+  tiles: "1x1"
+
+  top_module:  "tt_um_Melody_Generator_JLANordhal"
+
+  source_files:
+    - "tt_um_Melody_Generator_JLANordhal.v"
+    - "lfsr.v"
+    - "markov_chain_fsm.v"
+    - "pwm_generator.v"
+
+pinout:
+  # Inputs
+  ui[0]: "seed_0"
+  ui[1]: "seed_1"
+  ui[2]: "seed_2"
+  ui[3]: "seed_3"
+  ui[4]: "bpm_sel"
+  ui[5]: "dur_matrix_sel"
+  ui[6]: "none"
+  ui[7]: "none"
+
+  # Outputs
+  uo[0]: "pwm_out"
+  uo[1]: "none"
+  uo[2]: "none"
+  uo[3]: "none"
+  uo[4]: "none"
+  uo[5]: "none"
+  uo[6]: "none"
+  uo[7]: "none"
+
+  # Bidirectional pins
+  uio[0]: "none"
+  uio[1]: "none"
+  uio[2]: "none"
+  uio[3]: "none"
+  uio[4]: "none"
+  uio[5]: "none"
+  uio[6]: "none"
+  uio[7]: "none"
+
+# Do not change!
+yaml_version: 6
