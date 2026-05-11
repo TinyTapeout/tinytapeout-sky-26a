@@ -4,7 +4,7 @@ project:
   discord:      "mastensg"
   description:  "demo"
   language:     "Verilog"
-  clock_hz:     80000000
+  clock_hz:     25000000
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
@@ -16,7 +16,11 @@ project:
   # Source files must be in ./src and you must list each source file separately, one per line.
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
+    - "circ.v"
+    - "grad.v"
+    - "luz.v"
     - "project.v"
+    - "snow.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
