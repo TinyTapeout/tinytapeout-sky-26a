@@ -1,10 +1,10 @@
 # Tiny Tapeout project information (Wokwi project)
 project:
   wokwi_id:     457571266840151041       # Set this to the ID of your Wokwi project (the number from the project's URL)
-  title:        "First Project"      # Project title
+  title:        "3-Bit ALU"      # Project title
   author:       "Garima Malhotra"      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "logic circuit"      # One line description of what your project does
+  discord:      "nonu1208"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "This circuit implements a 3-Bit Arithmetic Logic Unit (ALU) capable of performing arithmetic and logical operations on two 3-bit binary numbers."      # One line description of what your project does
   language:     "Wokwi" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -16,29 +16,29 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: "input a"
-  ui[1]: "input b"
-  ui[2]: "input c"
-  ui[3]: "input d"
-  ui[4]: "input e"
-  ui[5]: "input f"
-  ui[6]: ""
-  ui[7]: ""
+  ui[0]: "a[2]"
+  ui[1]: "a[1]"
+  ui[2]: "a[0]"
+  ui[3]: "b[2]"
+  ui[4]: "b[1]"
+  ui[5]: "b[0]"
+  ui[6]: "s[1]"
+  ui[7]: "s[0]"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "7Seg_A"
+  uo[1]: "7Seg_B"
+  uo[2]: "7Seg_C"
+  uo[3]: "7Seg_D"
+  uo[4]: "7Seg_E"
+  uo[5]: "7Seg_F"
+  uo[6]: "7Seg_G"
+  uo[7]: "7Seg_DP"
 
   # Bidirectional pins
-  uio[0]: "output and"
-  uio[1]: "output nand"
-  uio[2]: "output or"
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
   uio[3]: ""
   uio[4]: ""
   uio[5]: ""
