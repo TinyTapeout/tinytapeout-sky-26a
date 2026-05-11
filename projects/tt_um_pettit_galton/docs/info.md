@@ -12,10 +12,7 @@ bar).
 
 Since 3 LFSRs are used with fixed seeds, the sequence is pre-determined (i.e. would always be the same).  The user can add randomization
 though.  If no gamepad is present, holding uio_in[0] high will "hold" the ball at the top of the screen for it to be dropped.  But it will
-also allow the LFSRs to continue to update, changing the sequence.  For gamepad users, use the A button. But also with gamepad use, the
-L and R buttons will add additional randomization by disabling LFSR updates to one of the three LFSRs while the button is pressed.  This
-will then cause a totally new sequence since now the LFSR updates have been shifted relative to each other.  I'm not sure the results will
-be noticable given the already random nature of havint 3 LFSRs in play.
+also allow the LFSRs to continue to update, changing the sequence.  For gamepad users, use the A button.
 
 ![](galton_frame.png)
 
@@ -26,16 +23,22 @@ off the pegs in the Galton board.
 
 If you connect a gamepad PMOD, you can us the following buttons:
 
-A:     Hold the ball at the top of the board prior to releaseing (this will also add randomization, not that it is really needed)
-Left:  You can coerce the topmost two left/right decisions to go left
-Right: You can coerce the topmost two left/right decisions to go right
-Up:    Increase the ball drop speed.  It can get pretty fast.
-Down:  Reduce the ball drop speed.
-Start: When the board fills (i.e. when one of the bins receives 958 balls) start will reset for it to begin again.
-L:     Disables updates of one of the 3 LFSRs, allowing the user to introduce more randomization.
-R:     Disables updates to one of the other 3 LFSRs.
+ - A:     Hold the ball at the top of the board prior to releaseing (this will also add randomization, not that it is really needed).
+ - B:     Toggles full histogram display mode.
+ - Left:  You can coerce the topmost two left/right decisions to go left.
+ - Right: You can coerce the topmost two left/right decisions to go right.
+ - Up:    Increase the ball drop speed.  It can get pretty fast.
+ - Down:  Reduce the ball drop speed.
+ - Start: When the board fills (i.e. when one of the bins receives 958 balls) start will reset for it to begin again.
+ - X:     This is the FAR OUT button!  Pressing it forces a single ball to one of the two extreme bins.
 
-When no gamepad PMOD is connected, the speed is constant and if it ever fills (would take a long time), it will reset automaically.
+When no gamepad PMOD is connected, the speed can be controlled via rising-edge detections on ui_in[1] and ui_in[2], plus
+the histogram toggled via rising-edge detec on ui_in[3]:
+
+ - ui_in[0]:  Hold Ball at top.
+ - ui_in[1]:  Edge detect increases ball speed.
+ - ui_in[2]:  Edge detect decreases ball speed.
+ - ui_in[3]:  Edge detect toggles histogram view mode.
 
 ## External hardware
 
