@@ -43,12 +43,12 @@ This results in a frame rate of exactly 60 Hz.
 
 ## How to test
 
-Connect the VGA Pmod to a VGA monitor that supports 640x480 @ 59.94Hz (with a 25.175 MHz clock input).
-The demo is not interactive - so just wait and see if anything happens.
+Connect the VGA Pmod to a VGA monitor that supports 640x480 @ 59.94 Hz (with a 25.175 MHz clock input).
+The demo is not interactive, so just wait and see if anything happens.
 
 ![Photo 1 of the demo running on a display with VGA input](photo1.jpg)
 ![Photo 2 of the demo running on a display with VGA input](photo2.jpg)
 
 ## External hardware
 
-This project uses the [VGA Pmod](https://tinytapeout.com/specs/pinouts/#vga-output)
+This project uses the [VGA Pmod](https://tinytapeout.com/specs/pinouts/#vga-output).
