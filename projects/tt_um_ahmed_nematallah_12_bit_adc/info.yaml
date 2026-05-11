@@ -25,34 +25,34 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: "RST"
-  ui[1]: "CLK_SEL"
+  ui[0]: "nc"
+  ui[1]: "nc"
   ui[2]: "nc"
   ui[3]: "nc"
   ui[4]: "nc"
   ui[5]: "nc"
-  ui[6]: "nc"
-  ui[7]: "nc"
+  ui[6]: "CLK_SEL"
+  ui[7]: "RST"
 
   # Outputs
   uo[0]: "nc"
   uo[1]: "nc"
   uo[2]: "RST"
   uo[3]: "CMPOUT"
-  uo[4]: "B11"
-  uo[5]: "B10"
-  uo[6]: "B9"
-  uo[7]: "B8"
+  uo[4]: "B0"
+  uo[5]: "B1"
+  uo[6]: "B2"
+  uo[7]: "B3"
 
   # Bidirectional pins
-  uio[0]: "B7"
-  uio[1]: "B6"
-  uio[2]: "B5"
-  uio[3]: "B4"
-  uio[4]: "B3"
-  uio[5]: "B2"
-  uio[6]: "B1"
-  uio[7]: "B0"
+  uio[0]: "B4"
+  uio[1]: "B5"
+  uio[2]: "B6"
+  uio[3]: "B7"
+  uio[4]: "B8"
+  uio[5]: "B9"
+  uio[6]: "B10"
+  uio[7]: "B11"
 
   # Analog pins - make sure to also set "analog_pins" above, else the pins won't be connected
   ua[0]: "AIN"
