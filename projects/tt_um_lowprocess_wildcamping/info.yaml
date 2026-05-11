@@ -5,7 +5,7 @@ project:
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Initial Tests and Basic MIPS CPU" # One line description of what your project does
   language:     "SystemVerilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     40000000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
@@ -36,34 +36,34 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: "PRESC_43"
-  ui[1]: "PICO_INT"
-  ui[2]: "PICO_I/O"
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: "INV_A"
+  ui[0]: "PRESC_D43"
+  ui[1]: "PRESC_INV"
+  ui[2]: "SR_SCK"
+  ui[3]: "SR_SDI"
+  ui[4]: "SR_SCS"
+  ui[5]: "PICO_INT"
+  ui[6]: "PICO_UIO"
+  ui[7]: "SR_TEST"
 
   # Outputs
-  uo[0]: "DIV_CLK_43"
+  uo[0]: "PRESC_OUT"
   uo[1]: "PICO_HALT"
   uo[2]: "PICO_WFI"
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: "INV_Y"
+  uo[3]: "PICO_ADDR[0]"
+  uo[4]: "PICO_ADDR[1]"
+  uo[5]: "PICO_ADDR[2]"
+  uo[6]: "PICO_ADDR[3]"
+  uo[7]: "PICO_ADDR[4]"
 
   # Bidirectional pins
-  uio[0]: "PICO_I/O[0]"
-  uio[1]: "PICO_I/O[1]"
-  uio[2]: "PICO_I/O[2]"
-  uio[3]: "PICO_I/O[3]"
-  uio[4]: "PICO_I/O[4]"
-  uio[5]: "PICO_I/O[5]"
-  uio[6]: "PICO_I/O[6]"
-  uio[7]: "PICO_I/O[7]"
+  uio[0]: "PICO_I/O[0]/SRT[0]"
+  uio[1]: "PICO_I/O[1]/SRT[1]"
+  uio[2]: "PICO_I/O[2]/SRT[2]"
+  uio[3]: "PICO_I/O[3]/SRT[3]"
+  uio[4]: "PICO_I/O[4]/SRT[4]"
+  uio[5]: "PICO_I/O[5]/SRT[5]"
+  uio[6]: "PICO_I/O[6]/SRT[6]"
+  uio[7]: "PICO_I/O[7]/SRT[7]"
 
 # Do not change!
 yaml_version: 6
