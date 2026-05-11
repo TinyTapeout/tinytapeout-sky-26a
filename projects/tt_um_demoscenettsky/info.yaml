@@ -2,9 +2,9 @@ project:
   title:        "Algorithmic Pattern Generator"
   author:       "Olonade Kelvin"
   discord:      "Olonade Kelvin"
-  description:  "A fully autonomous VGA visual synthesizer with audio, driven by pure logic gates and LFSR."
+  description: "Autonomous VGA + Audio visual synthesizer with 8 algorithmic scenes, LFSR-driven pattern evolution, and bytebeat audio."
   how_it_works: "VGA timing generator creates 640x480@60Hz. Render engine computes pixel colors from (x,y,t) using 8 hardwired bitwise equations. An LFSR autonomously changes patterns, shift amounts, and color palettes every second. Audio bytebeat is output during blanking intervals."
-  how_to_test:  "Apply 25 MHz clock, reset briefly. Connect uo[7:6] to VGA sync, uo[5:0] to resistor DAC for RGB. Connect uio[7:0] to audio DAC/amplifier. Image appears on VGA monitor and sounds morph over time."
+  how_to_test: "Apply 25 MHz clock, reset briefly. Connect uo[7:0] to TinyVGA compatible DAC + monitor (R1=G1=B1=VS= R0=G0=B0=HS). Audio is available on uio[7:0] during blanking. Patterns change automatically every second."
   language:     "Verilog"
   clock_hz:     25000000       # 25 MHz for 640x480 VGA
   tiles:        "1x1"          
@@ -15,24 +15,24 @@ project:
 # Pin assignments for the Platinum VGA + Audio design
 pinout:
   # Inputs (not actively used by autonomous mode, available for override)
-  ui[0]: "Manual override (unused)"
-  ui[1]: "Manual override (unused)"
-  ui[2]: "Manual override (unused)"
-  ui[3]: "Manual override (unused)"
-  ui[4]: "Unused"
-  ui[5]: "Unused"
-  ui[6]: "Unused"
-  ui[7]: "Unused"
+  ui[0]: "Shift amount bit 0"
+  ui[1]: "Shift amount bit 1"
+  ui[2]: "Shift amount bit 2"
+  ui[3]: "Shift override enable"
+  ui[4]: "Mode override enable"
+  ui[5]: "Mode bit 0"
+  ui[6]: "Mode bit 1"
+  ui[7]: "Mode bit 2"
 
   # Outputs (dedicated VGA + sync)
-  uo[0]: "Red LSB"
-  uo[1]: "Red MSB"
-  uo[2]: "Green LSB"
-  uo[3]: "Green MSB"
-  uo[4]: "Blue LSB"
-  uo[5]: "Blue MSB"
-  uo[6]: "Hsync"
-  uo[7]: "Vsync"
+  uo[0]: "R1  (Red MSB)"
+  uo[1]: "G1  (Green MSB)"
+  uo[2]: "B1  (Blue MSB)"
+  uo[3]: "VSYNC"
+  uo[4]: "R0  (Red LSB)"
+  uo[5]: "G0  (Green LSB)"
+  uo[6]: "B0  (Blue LSB)"
+  uo[7]: "HSYNC"
 
   # Bidirectional pins (audio during blanking)
   uio[0]: "Audio bit 0"
