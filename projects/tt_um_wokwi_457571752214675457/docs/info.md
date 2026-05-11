@@ -14,11 +14,20 @@ All operations are done simultaneously for each input. A multiplexer is then use
 
 ## How to test
 
+|  OPC    |    Operation  |
+|---------|---------------|
+|  0  0   |      AND      |
+|  0  1   |      OR       |
+|  1  0   |      XOR      |
+|  1  1   |      ADD      |
+
 |  input 7, 6, 5, 4, 3, 2, 1, 0  |  output 4, 3, 2, 1, 0  |
+|--------------------------------|------------------------|
 |          B[7:5] A[4:2] OPC[1:0]|         Z  C    Y[2:0] |
 |--------------------------------|------------------------|
 |        0  0  0  0  0  0  0  0  |         1  0  0  0  0  |
 |        0  0  1  0  1  0  0  1  |         0  0  0  1  1  |
+|        0  1  1  0  0  1  1  1  |         0  0  1  0  0  |
 
 
 ## External hardware
