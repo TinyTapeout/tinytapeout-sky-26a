@@ -1,0 +1,64 @@
+# Tiny Tapeout project information
+project:
+  title:        "TTSKY-SPSRAM-direct"      # Project title
+  author:       "Staf Verhaegen"
+  discord:      "Chips4Makers"
+  description:  "Sky130 single port SRAM with pins connected directly to TT tile pins."
+  language:     "Full Custom"
+  clock_hz:     66000000
+
+  tiles: "1x1"
+
+  analog_pins: 0
+  uses_3v3: false
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_c4m_spsram_direct"
+
+  # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
+  source_files:
+    - "template.py"
+    - "generate_layout.py"
+    - "behavioural.v"
+
+pinout:
+  # Inputs
+  ui[0]: "a[0]"
+  ui[1]: "a[1]"
+  ui[2]: "a[2]"
+  ui[3]: "a[3]"
+  ui[4]: "a[4]"
+  ui[5]: "a[5]"
+  ui[6]: "a[6]"
+  ui[7]: "we"
+
+  # Outputs
+  uo[0]: "q[0]"
+  uo[1]: "q[1]"
+  uo[2]: "q[2]"
+  uo[3]: "q[3]"
+  uo[4]: "q[4]"
+  uo[5]: "q[5]"
+  uo[6]: "q[6]"
+  uo[7]: "q[7]"
+
+  # Bidirectional pins
+  uio[0]: "d[0]"
+  uio[1]: "d[1]"
+  uio[2]: "d[2]"
+  uio[3]: "d[3]"
+  uio[4]: "d[4]"
+  uio[5]: "d[5]"
+  uio[6]: "d[6]"
+  uio[7]: "d[7]"
+
+  # Analog pins - make sure to also set "analog_pins" above, else the pins won't be connected
+  ua[0]: ""
+  ua[1]: ""
+  ua[2]: ""
+  ua[3]: ""
+  ua[4]: ""
+  ua[5]: ""
+
+# Do not change!
+yaml_version: 6
