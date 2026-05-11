@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "author": "Uri Shaked",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-dip-switch-8",
+      "id": "sw1",
+      "top": -176.5,
+      "left": -94.5,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-clock-generator",
+      "id": "clock1",
+      "top": -355.2,
+      "left": -115.2,
+      "attrs": { "frequency": "10000" }
+    },
+    { "type": "wokwi-vcc", "id": "pwr1", "top": -229.64, "left": -115.2, "attrs": {} },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "sw2",
+      "top": -370,
+      "left": -35.3,
+      "attrs": { "value": "1" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": -349,
+      "left": 19.2,
+      "attrs": { "color": "grey", "label": "Step", "bounce": "0", "key": "s" }
+    },
+    { "type": "wokwi-vcc", "id": "pwr3", "top": -373.64, "left": 105.6, "attrs": {} },
+    {
+      "type": "board-tt-block-input",
+      "id": "ttin",
+      "top": -228.13,
+      "left": 4.8,
+      "attrs": { "verilogRole": "input" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn2",
+      "top": -301,
+      "left": -134.4,
+      "attrs": { "color": "grey", "label": "RESET", "bounce": "0", "key": "r" }
+    },
+    { "type": "wokwi-gnd", "id": "gnd1", "top": -259.2, "left": -163.8, "attrs": {} },
+    {
+      "type": "board-tt-block-output",
+      "id": "ttout",
+      "top": -45.73,
+      "left": 897.6,
+      "attrs": { "verilogRole": "output" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": -293.65,
+      "left": -211.2,
+      "attrs": { "value": "1000" }
+    },
+    { "type": "wokwi-vcc", "id": "pwr5", "top": -325.64, "left": -230.4, "attrs": {} },
+    { "type": "wokwi-gate-not", "id": "not1", "top": -172.8, "left": 240, "attrs": {} },
+    { "type": "wokwi-gate-not", "id": "not2", "top": -76.8, "left": 240, "attrs": {} },
+    { "type": "wokwi-gate-not", "id": "not3", "top": 105.6, "left": 240, "attrs": {} },
+    { "type": "wokwi-gate-and-2", "id": "and1", "top": -182.4, "left": 355.2, "attrs": {} },
+    { "type": "wokwi-gate-and-2", "id": "and2", "top": -86.4, "left": 355.2, "attrs": {} },
+    { "type": "wokwi-gate-and-2", "id": "and3", "top": 19.6, "left": 357.6, "attrs": {} },
+    { "type": "wokwi-gate-and-2", "id": "and4", "top": 115.2, "left": 355.2, "attrs": {} },
+    { "type": "wokwi-gate-and-2", "id": "and5", "top": -130.4, "left": 507.6, "attrs": {} },
+    { "type": "wokwi-gate-and-2", "id": "and6", "top": 69.6, "left": 507.6, "attrs": {} },
+    { "type": "wokwi-gate-and-2", "id": "and_final1", "top": -28.8, "left": 614.4, "attrs": {} },
+    { "type": "wokwi-gate-not", "id": "not_fail1", "top": -28.8, "left": 758.4, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led_green1",
+      "top": -61.2,
+      "left": 1069.8,
+      "attrs": { "color": "green", "flip": "1" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_red1",
+      "top": -3.6,
+      "left": 1069.8,
+      "attrs": { "color": "red", "flip": "1" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -24.85,
+      "left": 1161.6,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 32.75,
+      "left": 1161.6,
+      "attrs": { "value": "220" }
+    },
+    { "type": "wokwi-gnd", "id": "gnd2", "top": 48, "left": 1266.6, "attrs": {} }
+  ],
+  "connections": [
+    [ "pwr1:VCC", "sw1:8a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:7a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:6a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:5a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:4a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:1a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:2a", "red", [ "v0" ] ],
+    [ "pwr1:VCC", "sw1:3a", "red", [ "v0" ] ],
+    [ "sw2:1", "clock1:CLK", "blue", [ "h-19.2", "v-57.6" ] ],
+    [ "sw1:1b", "ttin:EXTIN0", "green", [ "h0" ] ],
+    [ "sw1:2b", "ttin:EXTIN1", "green", [ "h0" ] ],
+    [ "ttin:EXTIN2", "sw1:3b", "green", [ "h0" ] ],
+    [ "ttin:EXTIN3", "sw1:4b", "green", [ "h0" ] ],
+    [ "sw1:5b", "ttin:EXTIN4", "green", [ "h0" ] ],
+    [ "ttin:EXTIN5", "sw1:6b", "green", [ "h0" ] ],
+    [ "sw1:7b", "ttin:EXTIN6", "green", [ "h0" ] ],
+    [ "sw1:8b", "ttin:EXTIN7", "green", [ "v0" ] ],
+    [ "sw2:2", "ttin:EXTCLK", "blue", [ "v0" ] ],
+    [ "btn1:1.l", "sw2:3", "blue", [ "h0" ] ],
+    [ "pwr3:VCC", "btn1:2.r", "red", [ "v0" ] ],
+    [ "btn2:2.l", "gnd1:GND", "black", [ "h0" ] ],
+    [ "ttin:EXTRST_N", "btn2:1.r", "orange", [ "h-38.4", "v-96" ] ],
+    [ "btn2:1.l", "r2:2", "green", [ "h0" ] ],
+    [ "pwr5:VCC", "r2:1", "red", [ "v0" ] ],
+    [ "not1:OUT", "and1:B", "green", [ "h13.2", "v-40.4" ] ],
+    [ "not2:OUT", "and2:B", "green", [ "h13.2", "v-40.4" ] ],
+    [ "not3:OUT", "and4:A", "green", [ "h13.2", "v40.4" ] ],
+    [ "and1:OUT", "and5:A", "green", [] ],
+    [ "and2:OUT", "and5:B", "green", [] ],
+    [ "and3:OUT", "and6:A", "green", [] ],
+    [ "and4:OUT", "and6:B", "green", [] ],
+    [ "and5:OUT", "and_final1:A", "green", [] ],
+    [ "and6:OUT", "and_final1:B", "green", [] ],
+    [ "and_final1:OUT", "not_fail1:IN", "green", [] ],
+    [ "and1:A", "ttin:IN0", "green", [ "h-48", "v-9.6" ] ],
+    [ "not1:IN", "ttin:IN1", "green", [ "v0", "h-19.2", "v-19.2" ] ],
+    [ "and2:A", "ttin:IN2", "green", [ "h-38.4", "v-9.6", "h-105.6", "v-76.8" ] ],
+    [ "ttin:IN3", "not2:IN", "green", [ "h96", "v28.8" ] ],
+    [ "ttin:IN4", "and3:A", "green", [ "h86.4", "v57.6" ] ],
+    [ "ttin:IN5", "and3:B", "green", [ "h76.8", "v9.6" ] ],
+    [ "ttin:IN6", "not3:IN", "green", [ "h67.2", "v48" ] ],
+    [ "ttin:IN7", "and4:B", "green", [ "h57.6", "v48" ] ],
+    [ "ttout:OUT1", "not_fail1:OUT", "green", [ "h0" ] ],
+    [ "ttout:OUT0", "not_fail1:IN", "green", [ "h-48", "v-38.4", "h-96" ] ],
+    [ "led_green1:C", "r1:1", "black", [] ],
+    [ "r1:2", "gnd2:GND", "black", [] ],
+    [ "led_red1:C", "r3:1", "black", [] ],
+    [ "r3:2", "gnd2:GND", "black", [] ],
+    [ "ttout:EXTOUT0", "led_green1:A", "green", [ "v0" ] ],
+    [ "ttout:EXTOUT1", "led_red1:A", "green", [ "h67.2", "v48", "h19.2" ] ]
+  ],
+  "dependencies": {}
+}
