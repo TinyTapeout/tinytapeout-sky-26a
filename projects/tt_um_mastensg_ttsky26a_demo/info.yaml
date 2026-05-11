@@ -1,8 +1,8 @@
 project:
-  title:        "demo"
+  title:        "Luz"
   author:       "mastensg"
   discord:      "mastensg"
-  description:  "demo"
+  description:  "El espacio es la luz"
   language:     "Verilog"
   clock_hz:     25000000
 
