@@ -1,9 +1,9 @@
 # Tiny Tapeout project information
 project:
-  title:        "Orion Iron Ion [TT08 demo competition]"      # Project title
+  title:        "Orion Iron Ion [TTSKY26a demo competition]"      # Project title
   author:       "Toivo Henningsson"      # Your name
   discord:      "possible_realities"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "My contribution to the TT10 demo competition"      # One line description of what your project does
+  description:  "2 tile demo, originally for TT10 demo competition"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     50400000       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -27,6 +27,7 @@ project:
     - "raster_scan.sv"
     - "demo_control.sv"
     - "logo_table_generated_c.v"
+    - "memories.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
