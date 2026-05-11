@@ -14,9 +14,9 @@ This is a Tiny Tapeout ASIC project implementing the SIMON64/128 lightweight blo
 SIMON is a family of lightweight block ciphers published by the NSA in 2013, designed for efficient hardware implementation. Its sister family, SPECK, similarly targets software efficiency.
 This project implements SIMON64/128, which is a variant of SIMON using 64-bit blocks and 128-bit keys.
 
-This project has not been hardened against side-channels or other cryptographic attacks. That could potentially be an interesting follow-up project.
+This project has not been hardened against side-channels or other cryptographic attacks.
 
-The ASIC implementation also includes an image illustrating a secure chip, on metal layers 1 and 2, as can be seen in this 3D render:
+The ASIC implementation also includes an image illustrating a secure chip, on metal layers 1 and 2, shown in this 3D render:
 
 ![GDS render](gds_3d_viewer.png)
 
@@ -80,22 +80,61 @@ Notes:
 
 ## How It Works
 
-SIMON supports multiple variants and parameter sets based on word size (n), which determines the overall block size (2n). The key size is a multiple of n by m=2, 3 or 4.
+### Overview
+SIMON supports multiple variants and parameter sets based on word size (n), which determines the overall block size (2n). The key size is `m*n` bits, where `m` is 2, 3, or 4.
 
-SIMON64/128 uses 32-bit words (n=32), 64-bit blocks (2n=64), and a 128-bit key (m=4) with 44 rounds.
+SIMON64/128 uses 32-bit words (`n=32`), 64-bit blocks (`2n=64`), and a 128-bit key (`m=4`) with 44 rounds.
 
-SIMON is a balanced Feistel cipher, meaning (for SIMON64/128) the 64-bit block is split into two 32-bit halves, and each round updates one half using a nonlinear function of the other half plus a round key.
+SIMON is a balanced Feistel cipher, where (for SIMON64/128) the 64-bit block is split into two 32-bit halves, and each round updates one half using a nonlinear function of the other half plus a round key.
 The round function consists of bitwise operations and rotations (no S-boxes), which is helpful when implementing in limited area in hardware.
 
 The project consists of three main Verilog modules: an SPI peripheral that handles communication with an external microcontroller, a SIMON64/128 cryptographic core that performs encryption and decryption, and a top-level wrapper that integrates them.
 
-The full key and block are loaded as bytes over SPI and stored in a 128-bit key window register (`k_window`) and 64-bit block state (split into `x_reg` and `y_reg`), but round processing itself is performed bit-by-bit over multiple cycles.
+The full key and block are loaded as bytes over SPI and stored in a 128-bit key window register `k_window` and 64-bit block state (split into `x_reg` and `y_reg`). Round processing is then performed iteratively, bit-by-bit over multiple cycles, to reduce area.
 
-Internally, each round is executed over 32 clock cycles (`ctr_bit` from 0 to 31). At each bit step, the core computes one new bit from the SIMON round function using rotations, bitwise AND/XOR logic, and the current round-key bit.
+### Implementation Details
+This section covers parts of the SIMON cipher together with notes on the implementation in this project.
+For full details on the inner workings of SIMON, see the References section further down.
 
-Round keys are generated from the 128-bit key window. The key-schedule constant is C = 0xFFFF_FFFC (2^32-4 for n=32), and the schedule combines C, one z-sequence bit, and rotated/XOR-mixed key words to form the next key word.
+The round function is as follows:
+```
+R(x, y) = (y ^ F(x) ^ k_i, x)
+```
+where
+```
+F(x) = (ROL(x, 1) & ROL(x, 8)) ^ ROL(x, 2)
+```
+and `k_i` is the key-word for round `i`, `ROL(x, n)` is left-rotation (circular shift) of the word `x` by `n` bits.
+The inverse round function is used for decryption:
+```
+R_inv(x, y) = (y, x ^ F(y) ^ k_i)
+```
+In the code, there is a shared datapath for encryption/decryption, selected by the `op_decrypt` control bit and key-schedule direction/state.
 
-The z-sequence (z3 for SIMON64/128) is generated using a 7-bit LFSR, which supports updating both backwards and forwards so that the key schedule can run in either direction.
+Round keys are generated from the 128-bit key window. The key-schedule constant is `c = 0xFFFF_FFFC` (`2^32-4` for n=32), and the schedule combines c, one z-sequence bit, and rotated/XOR-mixed key words to form the next key word.
+
+For `m=4`, the key schedule is
+```
+k_{i+4} = C ^ z_i ^ k_i ^ ROR(k_{i+3}, 3) ^ k_{i+1} ^ ROR(ROR(k_{i+3}, 3) ^ k_{i+1}, 1)
+```
+where `ROR(x, n)` is right-rotation (circular shift) of the word `x` by `n` bits.
+
+In the code, the key window is
+```
+k_window = {kw3, kw2, kw1, kw0}
+```
+
+The 62-bit z-sequence (z3 for SIMON64/128) is generated using an LFSR with a 7-bit state (with `P(x) = x^7 + x^4 + x + 1`), which supports updating both backwards and forwards so that the key schedule can run in either direction.
+Forward updates are
+```
+z_lfsr_fwd = {z_lfsr[4] ^ z_lfsr[1] ^ z_lfsr[0], z_lfsr[6:1]}
+```
+and backward updates
+```
+z_lfsr_bwd = {z_lfsr[5:0], z_lfsr[6] ^ z_lfsr[3] ^ z_lfsr[0]}
+```
+
+Internally, each round is executed over 32 clock cycles (`ctr_bit` from 0 to 31). At each bit step, the core computes one new bit from the SIMON round function and the current round-key bit `rk_bit = kw0[ctr_bit]`.
 
 A warmup phase is used to (re-)align the key schedule direction and state between encryption and decryption operations.
 
@@ -107,7 +146,7 @@ The cryptographic implementation matches the behavior of the [simonspeckciphers]
 
 Automated tests using [cocotb](https://www.cocotb.org/) and [pytest](https://docs.pytest.org/en/stable/) can be found under `test/`.
 
-The easiest way to use this project is by through MicroPython on the Tiny Tapeout demo board.
+The easiest way to use this project is through MicroPython on the Tiny Tapeout demo board.
 
 After the MicroPython examples below, this section also shows how to use an external FTDI breakout board to communicate through the bidirectional Pmod header from Python scripts running on a PC.
 Other external devices, such as microcontrollers or other SPI adapters, can be used in the same way.
@@ -176,7 +215,7 @@ def decrypt(spi, ciphertext, key):
     return spi_read_block64(spi)
 ```
 
-Secondly, initialize SPI:
+Next, initialize SPI:
 ```python
 spi_cs = tt.pins.pin_uio0
 spi_clk = tt.pins.pin_uio1
@@ -252,7 +291,7 @@ Plaintext: 656b696c20646e75
 
 ## References
 
-A bitserial implementation of SIMON128 has previously been taped out on [Tiny Tapeout 8](https://tinytapeout.com/chips/tt08/tt_um_simon_cipher) and [IHP 25a](https://tinytapeout.com/chips/ttihp25a/tt_um_simon_cipher), by [Secure-Embedded-Systems](https://github.com/Secure-Embedded-Systems/tt08-simon). That implementation has a fixed hardcoded (all zero) key and uses a custom 3-bit input and 2-bit output interface, but it also fits in only one Tiny Tapeout tile (instead of two, like this project).
+A bit-serial implementation of SIMON128 has previously been taped out on [Tiny Tapeout 8](https://tinytapeout.com/chips/tt08/tt_um_simon_cipher) and [IHP 25a](https://tinytapeout.com/chips/ttihp25a/tt_um_simon_cipher), by [Secure-Embedded-Systems](https://github.com/Secure-Embedded-Systems/tt08-simon). That implementation has a fixed hard-coded (all zero) key and uses a custom 3-bit input and 2-bit output interface, but it also fits in only one Tiny Tapeout tile (instead of two, like this project).
 
 The [simonspeckciphers](https://pypi.org/project/simonspeckciphers/) Python library was used as a reference, and is also included in the cocotb tests for this project.
 
