@@ -9,14 +9,15 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-RO test
+A dedicated RO with 33 stages and divide by 32 block - output frequency expected to be around 15MHz.
+A seperate simple XOR based TRNG with 5 unique ROs + XORing + sampling
 
 ## How to test
 
-RO test
+set all enable signals to high. observe the required frequency in the output pins
 
 
 ## External hardware
 
-RO test
+None
 
