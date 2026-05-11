@@ -1,0 +1,57 @@
+# Tiny Tapeout project information
+project:
+  title:        "Neuromorphic Processor (SNN)"      # Project title
+  author:       "Duarte Monteiro"      # Your name
+  discord:      "duartemonteiro."      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "Time-Multiplexed SNN accelerator"      # One line description of what your project does
+  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     50000000       # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_d_monteiro"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "project.v"
+    - "neuron.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "Weight bit 0 (from RP2040, valid during ACCUM)"
+  ui[1]: "Weight bit 1 (from RP2040, valid during ACCUM)"
+  ui[2]: "Weight bit 2 (from RP2040, valid during ACCUM)"
+  ui[3]: "Weight bit 3 (from RP2040, valid during ACCUM)"
+  ui[4]: "Ext spike neurons 4 (latched at S_LATCH, neuron 0 turn)"
+  ui[5]: "Ext spike neuron 5"
+  ui[6]: "Ext spike neuron 6"
+  ui[7]: "Ext spike neuron 7"
+
+  # Outputs
+  uo[0]: "Spike output neuron 0"
+  uo[1]: "Spike output neuron 1"
+  uo[2]: "Spike output neuron 2"
+  uo[3]: "Spike output neuron 3"
+  uo[4]: "Spike output neuron 4"
+  uo[5]: "Spike output neuron 5"
+  uo[6]: "Spike output neuron 6"
+  uo[7]: "Spike output neuron 7"
+
+  # Bidirectional pins
+  uio[0]: "learn_ena (input: 1 = Hebbian learning on)"
+  uio[1]: "in_accum (high when RP2040 must present weight)"
+  uio[2]: "Neuron select bit 0 — neuron_idx[0]"
+  uio[3]: "Neuron select bit 1 — neuron_idx[1]"
+  uio[4]: "Neuron select bit 2 — neuron_idx[2]"
+  uio[5]: "Synapse select bit 0 — syn_idx[0] (valid when in_accum=1)"
+  uio[6]: "Synapse select bit 1 — syn_idx[1] (valid when in_accum=1)"
+  uio[7]: "Synapse select bit 2 — syn_idx[2] (valid when in_accum=1)"
+
+# Do not change!
+yaml_version: 6
