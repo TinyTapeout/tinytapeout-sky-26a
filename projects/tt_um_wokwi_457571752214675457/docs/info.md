@@ -19,6 +19,7 @@ All operations are done simultaneously for each input. A multiplexer is then use
 |--------------------------------|------------------------|
 |        0  0  0  0  0  0  0  0  |         1  0  0  0  0  |
 |        0  0  1  0  1  0  0  1  |         0  0  0  1  1  |
+|        0  1  1  0  0  1  1  1  |         0  0  1  0  0  |
 
 
 ## External hardware
