@@ -1,0 +1,76 @@
+# Tiny Tapeout project information
+project:
+  title:        "tt_um_neutern_0"              # Project title
+  author:       "Nikola Cucuk"                 # Your name
+  discord:      ""                             # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "SNN network 2x2 neurons"      # One line description of what your project does
+  language:     "System Verilog"               # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     1000000                        # Clock frequency in Hz (or 0 if not applicable)
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "4x2"                                 # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_neutern_0"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "project.v"
+    - "tt_um_neutern_pkg.sv"
+    - "common/packages/tile_pkg.sv"
+    - "common/interfaces/rv_if.sv"
+    - "common/mem/coldfoot_mem_bytelane_sync.sv"
+    - "logical_neuron/src/logical_neuron_pkg.sv"
+    - "logical_neuron/src/logical_neuron_context_bank.sv"
+    - "logical_neuron/src/logical_neuron_state_bank.sv"
+    - "logical_neuron/src/logical_neuron_ucode_bank.sv"
+    - "neuron_compute/src/neuron_exec.sv"
+    - "neuron_compute/src/neuron_compute_core.sv"
+    - "tile/src/tile_event_queue_bank.sv"
+    - "tile/src/tile_fanout_bank.sv"
+    - "tile/src/tile_fanout_pool.sv"
+    - "tile/src/tile_ingress.sv"
+    - "tile/src/tile_host_io.sv"
+    - "tile/src/tile_fanout_executor.sv"
+    - "tile/src/tile_dispatch_scheduler.sv"
+    - "tile/src/tile_noc_egress.sv"
+    - "tile/src/tile_top.sv"
+    - "tile_top_tt.sv"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs — neutern_spike_t flit byte: {weight[3:0], 2'b00, neuron_y[0], neuron_x[0]}
+  ui[0]: "neuron_x[0]"
+  ui[1]: ""
+  ui[2]: "neuron_y[0]"
+  ui[3]: ""
+  ui[4]: "weight[0]"
+  ui[5]: "weight[1]"
+  ui[6]: "weight[2]"
+  ui[7]: "weight[3]"
+
+  # Outputs — neutern_spike_t flit byte: {weight[3:0], 2'b00, neuron_y[0], neuron_x[0]}
+  uo[0]: "spike_out[0] neuron_x[0]"
+  uo[1]: ""
+  uo[2]: "spike_out[2] neuron_y[0]"
+  uo[3]: ""
+  uo[4]: "spike_out[4] weight[0]"
+  uo[5]: "spike_out[5] weight[1]"
+  uo[6]: "spike_out[6] weight[2]"
+  uo[7]: "spike_out[7] weight[3]"
+
+  # Bidirectional pins
+  uio[0]: "rv_in_ready (output: tile ready to receive spike)"
+  uio[1]: "rv_out_valid (output: tile output spike valid)"
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+# Do not change!
+yaml_version: 6
