@@ -23,16 +23,35 @@ Each neuron maintains three 4-bit biological state registers:
 
 When a spike arrives the neuron's microcode program runs: accumulate the weight into `vm`, compare `vm ≥ θ`, and if true emit an output spike and reset `vm` to zero.
 
-### Spike Flit Format
+### Flit Formats (Mode-dependent)
 
-Both input (`ui`) and output (`uo`) carry the same 8-bit **neutern spike flit**:
+The same 8-bit input bus carries spikes and configuration headers.
+
+Spike mode (`uio[2]=0`):
 
 ```
 ui[7:4] = weight[3:0]   4-bit signed synaptic weight
-ui[3]   = 0             (unused)
-ui[2]   = neuron_y[0]   row address  (0 = top row,    1 = bottom row)
-ui[1]   = 0             (unused)
-ui[0]   = neuron_x[0]   column address (0 = left col, 1 = right col)
+ui[3:2] = 0             reserved in spike mode
+ui[1]   = neuron_y[0]   row address
+ui[0]   = neuron_x[0]   column address
+```
+
+Weight header mode (`uio[2]=1`, `uio[3]=0`):
+
+```
+ui[7:4] = weight[3:0]   write payload (ignored for read)
+ui[2]   = rd_wr         0=write weight, 1=read current weight
+ui[1]   = neuron_y[0]   target row
+ui[0]   = neuron_x[0]   target column
+```
+
+ISA header mode (`uio[2]=1`, `uio[3]=1`):
+
+```
+ui[7:3] = op5           micro-op opcode field
+ui[2]   = barrier       instruction barrier/tag bit
+ui[1]   = neuron_y[0]   target row
+ui[0]   = neuron_x[0]   target column
 ```
 
 Neuron addressing inside the 2×2 grid:
@@ -65,6 +84,8 @@ Input is accepted when both the sender asserts the data **and** `rv_in_ready` is
 | Reset (active-low) | `rst_n` | input |
 | Spike input byte | `ui[7:0]` | input |
 | Spike output byte | `uo[7:0]` | output |
+| Header mode select | `uio[2]` | input |
+| Header type select | `uio[3]` | input |
 | Tile ready to receive | `uio[0]` | output |
 | Output spike valid | `uio[1]` | output |
 
@@ -85,6 +106,13 @@ Assert `rst_n = 0` for at least 4 clock cycles, then release (`rst_n = 1`). All 
    | neuron 3 | `0001` (+1) | 1 | 1 | `0b00010101` = `0x15` |
 
 3. Hold the value for one clock cycle.
+
+### Step 2b — Configure/read neuron weight using header packets
+
+1. Set header mode: `uio[2]=1`, `uio[3]=0`.
+2. Weight write: drive `ui[2]=0`, set `ui[7:4]=weight`, set target in `ui[1:0]`.
+3. Weight read: drive `ui[2]=1`, same target in `ui[1:0]`.
+4. Observe returned output flit on `uo[7:0]`; `uo[7:4]` carries the readback weight.
 
 ### Step 3 — Observe output spikes
 

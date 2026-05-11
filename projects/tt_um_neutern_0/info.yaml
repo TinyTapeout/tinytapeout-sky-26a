@@ -5,7 +5,7 @@ project:
   discord:      ""                             # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "SNN network 2x2 neurons"      # One line description of what your project does
   language:     "System Verilog"               # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     1000000                        # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     15000000                       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "4x2"                                 # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
@@ -42,15 +42,19 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
-  # Inputs — neutern_spike_t flit byte: {weight[3:0], 2'b00, neuron_y[0], neuron_x[0]}
+  # Inputs — mode-dependent flit byte on ui_in[7:0]
+  #   Spike mode (uio[2]=0):  {weight[3:0], 2'b00, neuron_y[0], neuron_x[0]}
+  #   Weight header mode (uio[2]=1, uio[3]=0): ui[7:4]=weight(write), ui[2]=rd_wr, ui[1:0]=target
+  #     rd_wr(ui[2]): 0=write neuron weight, 1=read neuron weight
+  #   ISA mode   (uio[2]=1, uio[3]=1): {op5[4:0], barrier, neuron_y[0], neuron_x[0]}
   ui[0]: "neuron_x[0]"
-  ui[1]: ""
-  ui[2]: "neuron_y[0]"
-  ui[3]: ""
-  ui[4]: "weight[0]"
-  ui[5]: "weight[1]"
-  ui[6]: "weight[2]"
-  ui[7]: "weight[3]"
+  ui[1]: "neuron_y[0]"
+  ui[2]: "weight header rd_wr bit / ISA barrier bit"
+  ui[3]: "op5[0] (ISA mode only)"
+  ui[4]: "weight[0] / op5[1]"
+  ui[5]: "weight[1] / op5[2]"
+  ui[6]: "weight[2] / op5[3]"
+  ui[7]: "weight[3] / op5[4]"
 
   # Outputs — neutern_spike_t flit byte: {weight[3:0], 2'b00, neuron_y[0], neuron_x[0]}
   uo[0]: "spike_out[0] neuron_x[0]"
@@ -65,8 +69,8 @@ pinout:
   # Bidirectional pins
   uio[0]: "rv_in_ready (output: tile ready to receive spike)"
   uio[1]: "rv_out_valid (output: tile output spike valid)"
-  uio[2]: ""
-  uio[3]: ""
+  uio[2]: "rv_in_is_header (input: 1=header/config mode, 0=normal spike mode)"
+  uio[3]: "rv_in_header_is_isa (input: with uio[2]=1, 1=ISA config header, 0=weight config header)"
   uio[4]: ""
   uio[5]: ""
   uio[6]: ""
