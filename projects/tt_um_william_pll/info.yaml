@@ -1,0 +1,63 @@
+# Tiny Tapeout project information
+project:
+  title:        "Smartcard PLL Clock Generator"
+  author:       "William Anthony"
+  discord:      "wlmoi"
+  description:  "Enable-controlled PLL clock generator model for smartcard timing experiments"
+  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     13560000
+
+  # How many tiles your design occupies? A single tile is about 167x108 uM.
+  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+
+  # Your top module name must start with "tt_um_". Make it unique by including your github username:
+  top_module:  "tt_um_william_pll"
+
+  # List your project's source files here.
+  # Source files must be in ./src and you must list each source file separately, one per line.
+  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  source_files:
+    - "project.v"
+    - "pll_smartcard_top.v"
+    - "phase_frequency_detector.v"
+    - "digital_charge_pump_ctrl.v"
+    - "loop_filter.v"
+    - "vco_digital_model.v"
+    - "frequency_divider.v"
+    - "lock_detector.v"
+
+# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
+# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+pinout:
+  # Inputs
+  ui[0]: "PLL enable"
+  ui[1]: "Reserved"
+  ui[2]: "Reserved"
+  ui[3]: "Reserved"
+  ui[4]: "Divider ratio bit 0"
+  ui[5]: "Divider ratio bit 1"
+  ui[6]: "Divider ratio bit 2"
+  ui[7]: "Divider ratio bit 3"
+
+  # Outputs
+  uo[0]: "Lock detect"
+  uo[1]: "Almost lock"
+  uo[2]: "CLK/4 output"
+  uo[3]: "CLK/2 output"
+  uo[4]: "PLL output clock"
+  uo[5]: "PFD up monitor"
+  uo[6]: "PFD down monitor"
+  uo[7]: "Active enable status"
+
+  # Bidirectional pins
+  uio[0]: "CP gain bit 0 (input)"
+  uio[1]: "CP gain bit 1 (input)"
+  uio[2]: "CP gain bit 2 (input)"
+  uio[3]: "CP gain bit 3 (input)"
+  uio[4]: "VCO monitor bit 0 (output)"
+  uio[5]: "VCO monitor bit 1 (output)"
+  uio[6]: "VCO monitor bit 2 (output)"
+  uio[7]: "VCO monitor bit 3 (output)"
+
+# Do not change!
+yaml_version: 6
