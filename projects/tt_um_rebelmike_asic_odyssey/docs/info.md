@@ -9,11 +9,11 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-An LFSR starfield in the background, with a cellular automata "monolith" in the foreground, complete with TT logo "sticker" that comes from a ROM.
+An LFSR starfield in the background, with a cellular automata "monolith" in the foreground, complete with TT logo "sticker" that comes from a ROM.  A 2001: A Space Odyssey inspired theme plays.
 
 ## How to test
 
-Set inputs to 0, provide a ~36MHz clock, see if there's some output
+Set inputs to 0, provide a 36MHz clock, reset.  There should be VGA video (800x600 @ ~56.35Hz) and PWM audio.
 
 ## External hardware
 
