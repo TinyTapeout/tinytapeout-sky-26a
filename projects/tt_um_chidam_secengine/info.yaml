@@ -1,0 +1,40 @@
+# Tiny Tapeout project information
+project:
+  title: "Tiny Secure Telemetry Engine"
+  author: "Chidambaresh N ,Dr.Sudhanya P, Charukkesh S, Dhivya G, Priyavarshini T, Sriharivasan P S"
+  discord: ""
+  description: "8-bit security and integrity co-processor with nonlinear permutation, keystream, and CRC modes"
+  language: "Verilog"
+  clock_hz: 25000000
+  tiles: "1x1"
+  top_module: "tt_um_chidam_secengine"
+  source_files:
+    - "project.v"
+
+pinout:
+  ui[0]: "payload_0"
+  ui[1]: "payload_1"
+  ui[2]: "payload_2"
+  ui[3]: "payload_3"
+  ui[4]: "payload_4"
+  ui[5]: "payload_5"
+  ui[6]: "mode_0"
+  ui[7]: "mode_1"
+  uo[0]: "result_0"
+  uo[1]: "result_1"
+  uo[2]: "result_2"
+  uo[3]: "result_3"
+  uo[4]: "result_4"
+  uo[5]: "result_5"
+  uo[6]: "result_6"
+  uo[7]: "result_7"
+  uio[0]: ""
+  uio[1]: ""
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
+  uio[6]: ""
+  uio[7]: ""
+
+yaml_version: 6
