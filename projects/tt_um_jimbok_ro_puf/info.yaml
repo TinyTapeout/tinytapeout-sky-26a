@@ -1,28 +1,28 @@
 
 # Tiny Tapeout project information
 project:
-  title:        "Tiny Tapeout VGA"      # Project title
-  author:       "Kaelan Nah"      # Your name
-  discord:      "JimboK"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "VGA video output"      # One line description of what your project does
+  title:        "Ring Oscillator PUF"      # Project title
+  author:       "Kaelan"      # Your name
+  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "Creates a 129 bit PUF from 32 ring oscillators"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     25175000       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     50000000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_jimbok_tiny_tapeout"
+  top_module:  "tt_um_jimbok_ro_puf"
   
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:
     - "project.v"
-    - "hvsync_generator.v"
+    - "ro.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: ""
+  ui[0]: "start"
   ui[1]: ""
   ui[2]: ""
   ui[3]: ""
@@ -32,20 +32,20 @@ pinout:
   ui[7]: ""
 
   # Outputs
-  uo[0]: "R1"
-  uo[1]: "G1"
-  uo[2]: "B1"
-  uo[3]: "VSync"
-  uo[4]: "R0"
-  uo[5]: "G0"
-  uo[6]: "B0"
-  uo[7]: "HSync"
+  uo[0]: "done"
+  uo[1]: "busy"
+  uo[2]: ""
+  uo[3]: ""
+  uo[4]: ""
+  uo[5]: ""
+  uo[6]: ""
+  uo[7]: ""
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
+  uio[0]: "CS"
+  uio[1]: "MOSI"
+  uio[2]: "MISO"
+  uio[3]: "SCK"
   uio[4]: ""
   uio[5]: ""
   uio[6]: ""
