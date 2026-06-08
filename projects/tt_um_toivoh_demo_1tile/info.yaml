@@ -1,6 +1,6 @@
 # Tiny Tapeout project information
 project:
-  title:        "Single tile demo [TTSKY26a demo competition]"      # Project title
+  title:        "Underflow Uncubed [TTSKY26a demo competition]"      # Project title
   author:       "Toivo Henningsson"      # Your name
   discord:      "possible_realities"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Single tile demo for to the TTSKY26a demo competition"      # One line description of what your project does
@@ -33,11 +33,11 @@ pinout:
   ui[0]: "speedup[0]"
   ui[1]: "speedup[1]"
   ui[2]: "speedup[2]"
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[3]: "use_full_sample_rate"
+  ui[4]: "scale_override[0]"
+  ui[5]: "scale_override[1]"
+  ui[6]: "scale_override[2]"
+  ui[7]: "advance_y"
 
   # Outputs
   uo[0]: "R1"
