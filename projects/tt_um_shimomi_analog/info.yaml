@@ -3,7 +3,7 @@ project:
   title:        "analog circuit"      # Project title
   author:       "shimomi"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "delta-sigma modulator with band-gap reference"      # One line description of what your project does
+  description:  "delta-sigma A/D with band-gap reference"      # One line description of what your project does
   language:     "Analog" # other examples include Verilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -26,8 +26,8 @@ project:
 pinout:
   # Inputs
   ui[0]: "AIOSEL"
-  ui[1]: ""
-  ui[2]: ""
+  ui[1]: "BITSEL"
+  ui[2]: "EN"
   ui[3]: ""
   ui[4]: ""
   ui[5]: ""
@@ -36,19 +36,19 @@ pinout:
 
   # Outputs
   uo[0]: "BITOUT"
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[1]: "OUT0"
+  uo[2]: "OUT1"
+  uo[3]: "OUT2"
+  uo[4]: "OUT3"
+  uo[5]: "OUT4"
+  uo[6]: "OUT5"
+  uo[7]: "OUT6"
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
+  uio[0]: "OUT7"
+  uio[1]: "OUT8"
+  uio[2]: "OUT9"
+  uio[3]: "DCK"
   uio[4]: ""
   uio[5]: ""
   uio[6]: ""
